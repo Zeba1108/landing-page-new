@@ -95,11 +95,7 @@
         
         /* Premium Hero Card Glow - Enhanced Elevation */
         .hero-card-glow {
-            box-shadow: 
-                0 25px 80px rgba(107, 92, 230, 0.25),
-                0 10px 40px rgba(107, 92, 230, 0.15),
-                0 0 0 1px rgba(255, 255, 255, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: none;
         }
         
         /* Fixed Header Styling */
@@ -177,20 +173,18 @@
                     </button>
                 </div>
                 
-                <!-- Right Column - Visual Placeholder -->
+                <!-- Right Column - Video -->
                 <div class="order-first md:order-last">
-                    <div class="hero-card-glow bg-gradient-to-br from-[#6B5BAF] via-[#5A4A9F] to-[#4A3A8F] rounded-2xl p-12 md:p-16 flex flex-col items-center justify-center min-h-[300px] md:min-h-[400px] backdrop-blur-sm">
-                        <div class="text-center">
-                            <div class="w-16 h-16 mx-auto mb-4 rounded-lg bg-gradient-to-br from-white/25 to-white/15 backdrop-blur-sm shadow-lg"></div>
-                            <div class="space-y-2 mb-4">
-                                <div class="h-2 w-32 mx-auto bg-white/25 rounded backdrop-blur-sm shadow-sm"></div>
-                                <div class="h-2 w-24 mx-auto bg-white/25 rounded backdrop-blur-sm shadow-sm"></div>
-                                <div class="h-2 w-28 mx-auto bg-white/25 rounded backdrop-blur-sm shadow-sm"></div>
-                            </div>
-                            <p class="text-gray-200 text-xs mt-6">
-                                Sample dashboard view<br>Demo uses your actual data
-                            </p>
-                        </div>
+                    <div class="rounded-2xl overflow-hidden min-h-[300px] md:min-h-[400px]">
+                        <iframe 
+                            class="w-full h-full min-h-[300px] md:min-h-[400px] rounded-2xl"
+                            src="https://www.youtube.com/embed/ABah-rVEXzg" 
+                            title="MediAstraCloud Demo"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen
+                            style="aspect-ratio: 16/9;"
+                        ></iframe>
                     </div>
                 </div>
             </div>
@@ -624,7 +618,7 @@
             <p class="text-xl md:text-2xl text-[var(--text-inverse)] mb-10 leading-relaxed opacity-95">
                 See how this works for your store before deciding anything.
             </p>
-            <button onclick="openModal()" class="bg-[var(--warm-accent)] text-[var(--text-primary)] font-bold text-lg px-12 py-5 rounded-full hover:bg-[var(--warm-accent-dark)] transition-colors shadow-2xl">
+            <button onclick="openModal()" class="bg-[var(--primary-purple)] text-white font-semibold text-lg px-8 py-4 rounded-full hover:bg-[var(--primary-purple-dark)] transition-all shadow-2xl hover:shadow-[0_0_40px_rgba(107,92,230,0.5)] hover:scale-105 brightness-110 hover:brightness-115">
                 Book My Free Demo
             </button>
             <p class="text-[var(--text-inverse)] text-sm mt-6 opacity-90">
