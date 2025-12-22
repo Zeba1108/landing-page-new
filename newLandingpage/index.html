@@ -98,6 +98,91 @@
             box-shadow: none;
         }
         
+        /* Narrative Section Image Overlay */
+        .narrative-image-overlay {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .narrative-image-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(90, 74, 159, 0.16) 0%, 
+                rgba(61, 46, 122, 0.17) 50%, 
+                rgba(46, 31, 92, 0.18) 100%);
+            z-index: 1;
+        }
+        
+        .narrative-image-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(15%) brightness(0.92) contrast(1.05) saturate(0.85);
+        }
+        
+        /* Floating Problem Cards - Calm & Informational */
+        .floating-problem-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 0.875rem 1rem;
+            border-radius: 0.625rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            max-width: 180px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .floating-problem-card h4 {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #2E1F5C;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.01em;
+        }
+        
+        .floating-problem-card p {
+            font-size: 0.6875rem;
+            color: #6B7280;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+        
+        /* Additional Problem Cards - Soft Lavender Style */
+        .floating-problem-card-lavender {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(230, 225, 245, 0.95) 0%, rgba(240, 237, 250, 0.95) 100%);
+            backdrop-filter: blur(12px);
+            padding: 0.75rem 0.9375rem;
+            border-radius: 0.625rem;
+            box-shadow: 0 3px 12px rgba(90, 74, 159, 0.12);
+            z-index: 2;
+            max-width: 160px;
+            border-left: 3px solid rgba(90, 74, 159, 0.4);
+        }
+        
+        .floating-problem-card-lavender h4 {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #3D2E7A;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.01em;
+        }
+        
+        .floating-problem-card-lavender p {
+            font-size: 0.625rem;
+            color: #5A4A9F;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+        
         /* Fixed Header Styling */
         .fixed-header {
             position: fixed;
@@ -202,45 +287,59 @@
 
     <!-- Problem Story Section -->
     <section class="bg-[var(--neutral-gray-50)] py-16 md:py-20 px-4">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-8 text-center">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-12 text-center">
                 If you run a pharmacy, this is familiar.
             </h2>
-            <div class="space-y-4 text-[var(--text-secondary)] text-lg leading-relaxed">
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>You sit down to place an order.</p>
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <!-- Left Column - Contextual Image -->
+                <div class="order-2 md:order-1">
+                    <div class="narrative-image-overlay relative h-[400px] md:h-[500px]">
+                        <img 
+                            src="images/pharmacyowner.png" 
+                            alt="Pharmacy owner reviewing bills and managing orders in a real pharmacy"
+                            class="w-full h-full object-cover"
+                        >
+                    </div>
                 </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>You check last month's bill.</p>
+                
+                <!-- Right Column - Text Content -->
+                <div class="order-1 md:order-2 space-y-4 text-[var(--text-secondary)] text-lg leading-relaxed">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>You sit down to place an order.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>You check last month's bill.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>You ask your staff.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>You rely on experience.</p>
+                    </div>
+                    <p class="font-semibold text-[var(--text-primary)] pt-4">And still…</p>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>Some items expire.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>Some fast movers go out of stock.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>Capital gets blocked.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>Margins quietly drop.</p>
+                    </div>
+                    <p class="font-semibold text-[var(--text-primary)] pt-4">Not because you're careless —<br>but because ordering is still based on guesswork.</p>
                 </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>You ask your staff.</p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>You rely on experience.</p>
-                </div>
-                <p class="font-semibold text-[var(--text-primary)] pt-4">And still…</p>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>Some items expire.</p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>Some fast movers go out of stock.</p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>Capital gets blocked.</p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>Margins quietly drop.</p>
-                </div>
-                <p class="font-semibold text-[var(--text-primary)] pt-4">Not because you're careless —<br>but because ordering is still based on guesswork.</p>
             </div>
         </div>
     </section>
