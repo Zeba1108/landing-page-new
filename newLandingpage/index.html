@@ -43,9 +43,10 @@
             --text-inverse: #FFFFFF;
         }
         
-        /* Smooth scrolling */
+        /* Smooth scrolling with offset for fixed header */
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
         
         /* Hide scrollbar when modal is open */
@@ -88,24 +89,62 @@
                 0 0 0 1px rgba(255, 255, 255, 0.05),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
+        
+        /* Fixed Header Styling */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            margin: 0;
+            background: linear-gradient(to right, 
+                #5A4A9F 0%, 
+                #4A3A8F 12%, 
+                #3D2E7A 28%, 
+                #2E1F5C 45%, 
+                #1F1638 65%, 
+                #151020 85%, 
+                #0A050F 100%);
+        }
+        
+        /* Remove default margins to eliminate gap */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        
     </style>
 </head>
 <body class="bg-[var(--neutral-white)] text-[var(--text-primary)] font-sans antialiased">
 
     <!-- Header -->
-    <header class="bg-[var(--neutral-white)] py-4 px-4 md:px-6 border-b border-[var(--neutral-gray-200)]">
-        <div class="max-w-7xl mx-auto flex items-center space-x-3">
-            <img 
-                src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
-                alt="MediAstraCloud" 
-                class="h-8 md:h-10"
-            >
-            <span class="text-lg md:text-xl font-semibold text-[var(--text-primary)]">MediAstra</span>
+    <header class="fixed-header py-4 px-4 md:px-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo + Brand Name -->
+            <div class="flex items-center space-x-3">
+                <img 
+                    src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                    alt="MediAstraCloud" 
+                    class="h-8 md:h-10"
+                >
+                <span class="text-lg md:text-xl font-semibold text-white">MediAstra</span>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#features" class="text-gray-300 hover:text-white text-sm font-medium transition-colors duration-200">Features</a>
+                <a href="#how-it-works" class="text-gray-300 hover:text-white text-sm font-medium transition-colors duration-200">How It Works</a>
+                <a href="#faqs" class="text-gray-300 hover:text-white text-sm font-medium transition-colors duration-200">FAQs</a>
+            </nav>
         </div>
     </header>
+    
+    <!-- Spacer for fixed header -->
+    <div class="h-16"></div>
 
     <!-- Hero Section -->
-    <section class="relative hero-gradient-bg py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
+    <section class="relative hero-gradient-bg py-12 md:py-20 lg:py-28 px-4 overflow-hidden -mt-4">
         <div class="max-w-6xl mx-auto relative z-10">
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <!-- Left Column - Text Content -->
@@ -328,7 +367,7 @@
     </section>
 
     <!-- How It Works Section -->
-    <section class="bg-[var(--neutral-white)] py-16 md:py-20 px-4">
+    <section id="how-it-works" class="bg-[var(--neutral-white)] py-16 md:py-20 px-4">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-12 text-center">
                 How It Fits Into Your Day
@@ -417,7 +456,7 @@
             <p class="text-lg text-[var(--text-primary)] font-semibold text-center mb-12">
                 So we added a few focused tools — all inside the same free starter login.
             </p>
-            <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-10 text-center">
+            <h2 id="features" class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-10 text-center">
                 Free Starter Layer Features
             </h2>
             <div class="grid md:grid-cols-2 gap-6 mb-10">
@@ -487,7 +526,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="bg-[var(--neutral-white)] py-16 md:py-20 px-4">
+    <section id="faqs" class="bg-[var(--neutral-white)] py-16 md:py-20 px-4">
         <div class="max-w-3xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-6 text-center">
                 Frequently asked questions
