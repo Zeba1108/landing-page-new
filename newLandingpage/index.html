@@ -67,6 +67,27 @@
         .gradient-accent-bar {
             background: linear-gradient(to bottom, var(--primary-purple), var(--secondary-purple));
         }
+        
+        /* Premium Hero Background - Dark Purple to Indigo to Near-Black */
+        .hero-gradient-bg {
+            background: linear-gradient(to right, 
+                #5A4A9F 0%, 
+                #4A3A8F 12%, 
+                #3D2E7A 28%, 
+                #2E1F5C 45%, 
+                #1F1638 65%, 
+                #151020 85%, 
+                #0A050F 100%);
+        }
+        
+        /* Premium Hero Card Glow - Enhanced Elevation */
+        .hero-card-glow {
+            box-shadow: 
+                0 25px 80px rgba(107, 92, 230, 0.25),
+                0 10px 40px rgba(107, 92, 230, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body class="bg-[var(--neutral-white)] text-[var(--text-primary)] font-sans antialiased">
@@ -84,38 +105,38 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative bg-[var(--secondary-purple-muted)] py-16 md:py-24 lg:py-32 px-4">
-        <div class="max-w-6xl mx-auto">
+    <section class="relative hero-gradient-bg py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
+        <div class="max-w-6xl mx-auto relative z-10">
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <!-- Left Column - Text Content -->
                 <div class="text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--primary-purple)] mb-6 leading-tight">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                         Still guessing how much to order for your pharmacy?
                     </h1>
-                    <div class="text-lg md:text-xl text-[var(--text-secondary)] mb-4 leading-relaxed space-y-2">
+                    <div class="text-lg md:text-xl text-gray-300 mb-4 leading-relaxed space-y-2">
                         <p>Overstocked slow movers.</p>
                         <p>Out-of-stock fast movers.</p>
                         <p>Expiry losses every month.</p>
                     </div>
-                    <p class="text-lg md:text-xl text-[var(--text-primary)] font-semibold mb-8">
+                    <p class="text-lg md:text-xl text-gray-200 font-semibold mb-8">
                         Start fixing this — free — without changing your billing system.
                     </p>
-                    <button onclick="openModal()" class="bg-[var(--warm-accent)] text-[var(--text-inverse)] font-semibold text-lg px-8 py-4 rounded-full hover:bg-[var(--warm-accent-dark)] transition-colors shadow-lg">
+                    <button onclick="openModal()" class="bg-[var(--primary-purple)] text-white font-semibold text-lg px-8 py-4 rounded-full hover:bg-[var(--primary-purple-dark)] transition-all shadow-2xl hover:shadow-[0_0_40px_rgba(107,92,230,0.5)] hover:scale-105 brightness-110 hover:brightness-115">
                         See How This Works for Your Store (Free)
                     </button>
                 </div>
                 
                 <!-- Right Column - Visual Placeholder -->
                 <div class="order-first md:order-last">
-                    <div class="bg-[var(--neutral-gray-50)] border-2 border-[var(--neutral-gray-200)] rounded-2xl p-12 md:p-16 flex flex-col items-center justify-center min-h-[300px] md:min-h-[400px]">
+                    <div class="hero-card-glow bg-gradient-to-br from-[#6B5BAF] via-[#5A4A9F] to-[#4A3A8F] rounded-2xl p-12 md:p-16 flex flex-col items-center justify-center min-h-[300px] md:min-h-[400px] backdrop-blur-sm">
                         <div class="text-center">
-                            <div class="w-16 h-16 mx-auto mb-4 rounded-lg bg-gradient-to-br from-[var(--primary-purple)] to-[var(--secondary-purple)] opacity-20"></div>
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-lg bg-gradient-to-br from-white/25 to-white/15 backdrop-blur-sm shadow-lg"></div>
                             <div class="space-y-2 mb-4">
-                                <div class="h-2 w-32 mx-auto bg-[var(--neutral-gray-200)] rounded"></div>
-                                <div class="h-2 w-24 mx-auto bg-[var(--neutral-gray-200)] rounded"></div>
-                                <div class="h-2 w-28 mx-auto bg-[var(--neutral-gray-200)] rounded"></div>
+                                <div class="h-2 w-32 mx-auto bg-white/25 rounded backdrop-blur-sm shadow-sm"></div>
+                                <div class="h-2 w-24 mx-auto bg-white/25 rounded backdrop-blur-sm shadow-sm"></div>
+                                <div class="h-2 w-28 mx-auto bg-white/25 rounded backdrop-blur-sm shadow-sm"></div>
                             </div>
-                            <p class="text-[var(--text-tertiary)] text-xs mt-6">
+                            <p class="text-gray-200 text-xs mt-6">
                                 Sample dashboard view<br>Demo uses your actual data
                             </p>
                         </div>
