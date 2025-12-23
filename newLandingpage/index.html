@@ -834,13 +834,120 @@
 
     <!-- Image Popup Modal -->
     <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
-        <div class="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center">
+        <div class="relative max-w-6xl w-full max-h-[90vh] flex flex-col md:flex-row gap-4 md:gap-6 bg-[var(--neutral-white)] rounded-lg shadow-2xl overflow-hidden">
             <!-- Close button -->
-            <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white hover:text-gray-300 text-3xl leading-none bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center z-10">
+            <button onclick="closeImageModal()" class="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-3xl leading-none bg-white bg-opacity-90 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md">
                 &times;
             </button>
-            <!-- Image -->
-            <img src="images/purchase_order_new.png" alt="Order vs Received Check" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
+            
+            <!-- Image Section (60% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[60%] order-2 md:order-1 flex items-center justify-center bg-[var(--neutral-gray-50)] p-4 md:p-6 overflow-auto">
+                <img src="images/purchase_order_new.png" alt="Order vs Received Check" class="max-w-full max-h-[85vh] rounded-lg shadow-md">
+            </div>
+            
+            <!-- Explanation Card (40% on desktop, full width on mobile, appears second on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-2 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 md:p-8 overflow-y-auto max-h-[90vh]">
+                <h2 class="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-6 pb-4 border-b border-[var(--neutral-gray-200)]">
+                    Order vs Received Analysis
+                </h2>
+                
+                <!-- What you're seeing -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary-purple)] mr-2"></span>
+                        What you're seeing
+                    </h3>
+                    <p class="text-[var(--text-secondary)] leading-relaxed">
+                        A side-by-side comparison screen that matches your purchase order against what you actually received from the supplier. Each line item shows ordered quantities versus received quantities, highlighting any discrepancies instantly.
+                    </p>
+                </div>
+                
+                <!-- What problems it catches -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary-purple)] mr-2"></span>
+                        What problems it catches
+                    </h3>
+                    <ul class="space-y-2 text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Missing items that were ordered but not delivered</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Quantity mismatches (ordered 100, received 80)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Pack size changes (ordered strips, received bottles)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Extra items delivered that weren't in the order</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Wrong product substitutions</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- How to read this screen -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary-purple)] mr-2"></span>
+                        How to read this screen
+                    </h3>
+                    <ul class="space-y-2 text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Green highlights indicate perfect matches</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Red or yellow highlights flag discrepancies</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Compare the "Ordered" and "Received" columns side-by-side</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Click on any flagged item to see details and take action</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Why this matters -->
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary-purple)] mr-2"></span>
+                        Why this matters
+                    </h3>
+                    <ul class="space-y-2 text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Prevents billing errors before they enter your system</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Catches supplier mistakes immediately, not weeks later</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Reduces inventory discrepancies and stock confusion</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Saves time by flagging issues at receipt, not during reconciliation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Protects your pharmacy from financial losses from missing or wrong items</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
