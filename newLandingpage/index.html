@@ -113,6 +113,50 @@
                 #E8EAED 100%);
         }
         
+        /* Features Section - Zoho-style Background Panel */
+        .features-section-bg {
+            background: linear-gradient(to bottom, 
+                #FFFFFF 0%, 
+                #FFFFFF 20%, 
+                #FAFBFC 80%, 
+                #F5F6F7 100%);
+        }
+        
+        /* Feature Block - Zoho-style Vertical Layout */
+        .feature-block {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 4rem;
+        }
+        
+        .feature-block:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Feature Image Placeholder - Zoho-style */
+        .feature-image-placeholder {
+            background: #F3F4F6;
+            border: 1px dashed #D1D5DB;
+            border-radius: 0.75rem;
+            position: relative;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+        
+        .feature-image-placeholder::before {
+            content: 'Feature preview';
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 0.75rem;
+            color: #6B7280;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+        }
+        
         /* Premium Hero Card Glow - Enhanced Elevation */
         .hero-card-glow {
             box-shadow: none;
@@ -573,57 +617,88 @@
     </section>
 
     <!-- Expansion Section -->
-    <section class="bg-[var(--neutral-white)] py-16 md:py-20 px-4">
-        <div class="max-w-4xl mx-auto">
+    <section class="features-section-bg py-16 md:py-20 px-4">
+        <div class="max-w-6xl mx-auto">
             <p class="text-lg text-[var(--text-secondary)] text-center mb-12 max-w-2xl mx-auto leading-relaxed">
                 Once pharmacy owners started using this, they asked for help with more daily problems.
             </p>
             <p class="text-lg text-[var(--text-primary)] font-semibold text-center mb-12">
                 So we added a few focused tools — all inside the same free starter login.
             </p>
-            <h2 id="features" class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-10 text-center">
+            <h2 id="features" class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-12 text-center">
                 Free Starter Layer Features
             </h2>
-            <div class="grid md:grid-cols-2 gap-6 mb-10">
-                <!-- Primary Feature Card - Smarter Ordering Assistant -->
-                <div class="md:col-span-2 bg-[var(--neutral-white)] rounded-xl p-8 border-2 border-[var(--neutral-gray-200)] shadow-lg relative overflow-hidden">
-                    <!-- Gradient top border -->
-                    <div class="absolute top-0 left-0 right-0 h-1 gradient-bg"></div>
-                    <!-- Most Used Label -->
-                    <div class="inline-block bg-[var(--primary-purple)] text-[var(--text-inverse)] text-xs font-semibold px-3 py-1 rounded-full mb-4">
-                        Most Used
-                    </div>
-                    <div class="flex flex-col md:flex-row md:items-start md:space-x-6">
-                        <div class="flex-grow">
-                            <div class="w-1 h-16 gradient-accent-bar rounded-full mb-4"></div>
-                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-3">Smarter Ordering Assistant</h3>
-                            <p class="text-lg text-[var(--text-secondary)] leading-relaxed">Get suggested order quantities based on your sales patterns and trends. Reduce expiry losses and avoid stock-outs with data-driven recommendations.</p>
+            
+            <!-- Feature Blocks - Vertical Zoho-style Layout with Zig-Zag -->
+            <div class="space-y-16 mb-10">
+                <!-- Feature Block 1 - Smarter Ordering Assistant (Image Right) -->
+                <div class="feature-block">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <div class="inline-block bg-[var(--primary-purple)] text-[var(--text-inverse)] text-xs font-semibold px-3 py-1 rounded-full mb-5">
+                                Most Used
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-5">Smarter Ordering Assistant</h3>
+                            <p class="text-lg text-[var(--text-secondary)] leading-relaxed mb-6">Get suggested order quantities based on your sales patterns and trends. Reduce expiry losses and avoid stock-outs with data-driven recommendations.</p>
+                            <button onclick="openModal()" class="bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold px-6 py-3 rounded-lg hover:bg-[var(--primary-purple-dark)] transition-colors">
+                                Try This Free
+                            </button>
                         </div>
-                        <div class="mt-6 md:mt-0">
-                            <button onclick="openModal()" class="bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold px-6 py-3 rounded-lg hover:bg-[var(--primary-purple-dark)] transition-colors whitespace-nowrap">
+                        <div class="order-first md:order-last">
+                            <div class="feature-image-placeholder"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature Block 2 - Vendor Price Comparison (Image Left) -->
+                <div class="feature-block">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="order-last md:order-first">
+                            <div class="feature-image-placeholder"></div>
+                        </div>
+                        <div class="order-first md:order-last">
+                            <h3 class="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-5">Vendor Price Comparison</h3>
+                            <p class="text-lg text-[var(--text-secondary)] leading-relaxed mb-6">Compare supplier prices before ordering and spot cost differences.</p>
+                            <button onclick="openModal()" class="bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold px-6 py-3 rounded-lg hover:bg-[var(--primary-purple-dark)] transition-colors">
                                 Try This Free
                             </button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Secondary Feature Cards -->
-                <div class="bg-[var(--neutral-gray-50)] rounded-lg p-6 border border-[var(--neutral-gray-200)]">
-                    <div class="w-1 h-10 bg-[var(--primary-purple)] rounded-full mb-4 opacity-70"></div>
-                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-2">Vendor Price Comparison</h3>
-                    <p class="text-sm text-[var(--text-secondary)]">Compare supplier prices before ordering and spot cost differences.</p>
+                <!-- Feature Block 3 - Order vs Received Check (Image Right) -->
+                <div class="feature-block">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-5">Order vs Received Check</h3>
+                            <p class="text-lg text-[var(--text-secondary)] leading-relaxed mb-6">Instantly identify missing items, quantity mismatches, or pack changes.</p>
+                            <button onclick="openModal()" class="bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold px-6 py-3 rounded-lg hover:bg-[var(--primary-purple-dark)] transition-colors">
+                                Try This Free
+                            </button>
+                        </div>
+                        <div class="order-first md:order-last">
+                            <div class="feature-image-placeholder"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-[var(--neutral-gray-50)] rounded-lg p-6 border border-[var(--neutral-gray-200)]">
-                    <div class="w-1 h-10 bg-[var(--primary-purple)] rounded-full mb-4 opacity-70"></div>
-                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-2">Order vs Received Check</h3>
-                    <p class="text-sm text-[var(--text-secondary)]">Instantly identify missing items, quantity mismatches, or pack changes.</p>
-                </div>
-                <div class="bg-[var(--neutral-gray-50)] rounded-lg p-6 border border-[var(--neutral-gray-200)] md:col-span-2">
-                    <div class="w-1 h-10 bg-[var(--primary-purple)] rounded-full mb-4 opacity-70"></div>
-                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-2">Payment Alerts & Reminders</h3>
-                    <p class="text-sm text-[var(--text-secondary)]">Notify suppliers after payment and send reminders to customers with pending dues.</p>
+                
+                <!-- Feature Block 4 - Payment Alerts & Reminders (Image Left) -->
+                <div class="feature-block">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="order-last md:order-first">
+                            <div class="feature-image-placeholder"></div>
+                        </div>
+                        <div class="order-first md:order-last">
+                            <h3 class="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-5">Payment Alerts & Reminders</h3>
+                            <p class="text-lg text-[var(--text-secondary)] leading-relaxed mb-6">Notify suppliers after payment and send reminders to customers with pending dues.</p>
+                            <button onclick="openModal()" class="bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold px-6 py-3 rounded-lg hover:bg-[var(--primary-purple-dark)] transition-colors">
+                                Try This Free
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
             <div class="text-center space-y-2 text-lg text-[var(--text-secondary)]">
                 <p>Use only what helps you.</p>
                 <p>Ignore the rest.</p>
