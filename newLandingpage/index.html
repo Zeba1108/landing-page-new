@@ -281,6 +281,14 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
         
+        /* Zoho-style Testimonial Image */
+        .zoho-testimonial-image {
+            border-radius: 1rem;
+            aspect-ratio: 4 / 3;
+            width: 100%;
+            overflow: hidden;
+        }
+        
         /* Premium Hero Card Glow - Enhanced Elevation */
         .hero-card-glow {
             box-shadow: none;
@@ -746,13 +754,25 @@
 
     <!-- Testimonial Section -->
     <section class="bg-[var(--neutral-gray-50)] py-16 md:py-20 px-4">
-        <div class="max-w-3xl mx-auto">
-            <div class="bg-[var(--neutral-white)] rounded-2xl p-8 md:p-12 border border-[var(--neutral-gray-200)]">
-                <p class="text-lg md:text-xl text-[var(--text-primary)] mb-6 leading-relaxed italic">
-                    "Earlier we used to overstock some items and miss fast movers. Now ordering is clear. We reduced expiry and feel confident while placing orders."
-                </p>
-                <div class="border-t border-[var(--neutral-gray-200)] pt-6">
-                    <p class="font-semibold text-[var(--text-primary)]">Retail Pharmacy Owner</p>
+        <div class="max-w-6xl mx-auto">
+            <div class="bg-[var(--neutral-white)] rounded-2xl p-8 md:p-12 border border-[var(--neutral-gray-200)] shadow-sm">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <!-- Left: Image Container -->
+                    <div class="order-2 md:order-1">
+                        <div class="zoho-testimonial-image">
+                            <img src="images/testomonialpic.jpg" alt="Retail Pharmacy Owner" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Testimonial Content -->
+                    <div class="order-1 md:order-2">
+                        <p class="text-xl md:text-2xl text-[var(--text-primary)] mb-6 leading-relaxed font-medium">
+                            "Earlier we used to overstock some items and miss fast movers. Now ordering is clear. We reduced expiry and feel confident while placing orders."
+                        </p>
+                        <div class="pt-4">
+                            <p class="text-base md:text-lg font-semibold text-[var(--text-primary)]">— Retail Pharmacy Owner</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
