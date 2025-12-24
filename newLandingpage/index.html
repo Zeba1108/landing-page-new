@@ -713,7 +713,9 @@
                 
                 <!-- Feature Card 2 - Vendor Price Comparison -->
                 <div class="feature-card">
-                    <div class="feature-image-placeholder"></div>
+                    <div class="cursor-pointer" onclick="openVendorModal()">
+                        <img src="images/vendor.png" alt="Vendor Price Comparison" class="w-full h-auto rounded-md mb-4 hover:opacity-90 transition-opacity">
+                    </div>
                     <h3 class="text-xl md:text-2xl font-semibold text-[var(--text-primary)] mb-3">Vendor Price Comparison</h3>
                     <p class="text-base text-[var(--text-secondary)] leading-relaxed">Compare supplier prices before ordering and spot cost differences.</p>
                 </div>
@@ -887,6 +889,76 @@
             </p>
         </div>
     </footer>
+
+    <!-- Vendor Price Comparison Modal -->
+    <div id="vendorModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
+        <div class="relative max-w-7xl w-full max-h-[95vh] flex flex-col md:flex-row gap-4 md:gap-6 bg-[var(--neutral-white)] rounded-lg shadow-2xl overflow-hidden">
+            <!-- Close button -->
+            <button onclick="closeVendorModal()" class="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-3xl leading-none bg-white bg-opacity-90 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md">
+                &times;
+            </button>
+            
+            <!-- Image Section (60% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[60%] order-2 md:order-1 flex items-center justify-center bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-auto">
+                <img src="images/vendor.png" alt="Vendor Price Comparison" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; object-fit: contain;">
+            </div>
+            
+            <!-- Explanation Card (40% on desktop, full width on mobile, appears second on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-2 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm">
+                <h3 class="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-4 pb-4 border-b border-[var(--neutral-gray-200)]">
+                    Vendor Price Comparison
+                </h3>
+                
+                <p class="text-[var(--text-secondary)] leading-relaxed mb-6">
+                    This screen compares the same items across multiple vendors to reveal price differences instantly.
+                </p>
+                
+                <!-- Bullet points explaining the image -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-[var(--text-primary)] mb-3">What you're seeing:</h4>
+                    <ul class="space-y-2 text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Shows selected vendors and time period (year/month filters)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Highlights the best price per item automatically</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Calculates price difference, percentage difference, and total impact</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Helps identify where margins are leaking</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Outcome section -->
+                <div class="mb-4">
+                    <h4 class="text-lg font-semibold text-[var(--text-primary)] mb-3">
+                        <span class="font-bold">Outcome:</span>
+                    </h4>
+                    <ul class="space-y-2 text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Buy from the most cost-effective vendor</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Reduce purchase cost without manual comparison</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Make data-backed purchasing decisions</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Image Popup Modal -->
     <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
@@ -1107,6 +1179,7 @@
             if (e.key === 'Escape') {
                 closeModal();
                 closeImageModal();
+                closeVendorModal();
             }
         });
 
@@ -1127,6 +1200,26 @@
         document.getElementById('imageModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeImageModal();
+            }
+        });
+
+        // Vendor Modal functions
+        function openVendorModal() {
+            const modal = document.getElementById('vendorModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeVendorModal() {
+            const modal = document.getElementById('vendorModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close vendor modal when clicking on backdrop
+        document.getElementById('vendorModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVendorModal();
             }
         });
 
