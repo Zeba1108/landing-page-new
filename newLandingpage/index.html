@@ -798,7 +798,9 @@
                     <div class="inline-block bg-[var(--primary-purple)] text-[var(--text-inverse)] text-xs font-semibold px-1.5 py-0.5 rounded-full mb-4 w-fit">
                         Most Used
                     </div>
-                    <div class="feature-image-placeholder"></div>
+                    <div class="cursor-pointer" onclick="openSmarterOrderingModal()">
+                        <img src="images/forecast.png" alt="Forecast Demand & Smart Ordering" class="w-full h-auto rounded-md mb-3 hover:opacity-90 transition-opacity" style="max-height: 200px; object-fit: cover; object-position: top;">
+                    </div>
                     <h3 class="text-xl md:text-2xl font-semibold text-[var(--text-primary)] mb-2">Smarter Ordering Assistant</h3>
                     <p class="text-base text-[var(--text-secondary)] leading-relaxed mb-0">Get suggested order quantities based on your sales patterns and trends. Reduce expiry losses and avoid stock-outs with data-driven recommendations.</p>
                 </div>
@@ -823,7 +825,9 @@
                 
                 <!-- Feature Card 4 - Payment Alerts & Reminders -->
                 <div class="feature-card">
-                    <div class="feature-image-placeholder"></div>
+                    <div class="cursor-pointer" onclick="openPaymentModal()">
+                        <img src="images/paymentalerts1.png" alt="Payment Alerts & Reminders" class="w-full h-auto rounded-md mb-3 hover:opacity-90 transition-opacity" style="max-height: 200px; object-fit: cover; object-position: top;">
+                    </div>
                     <h3 class="text-xl md:text-2xl font-semibold text-[var(--text-primary)] mb-2">Payment Alerts & Reminders</h3>
                     <p class="text-base text-[var(--text-secondary)] leading-relaxed mb-0">Notify suppliers after payment and send reminders to customers with pending dues.</p>
                 </div>
@@ -990,69 +994,57 @@
                 &times;
             </button>
             
-            <!-- Image Section (60% on desktop, full width on mobile, appears first on mobile) -->
-            <div class="w-full md:w-[60%] order-2 md:order-1 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
+            <!-- Image Section (Right - 60% on desktop, full width on mobile, appears second on mobile) -->
+            <div class="w-full md:w-[60%] order-2 md:order-2 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
                 <img src="images/vendor_pricing_merged_scroll.png" alt="Vendor Price Comparison" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
             </div>
             
-            <!-- Explanation Card (40% on desktop, full width on mobile, appears second on mobile) -->
-            <div class="w-full md:w-[40%] order-1 md:order-2 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm">
-                <h3 class="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-4 pb-4 border-b border-[var(--neutral-gray-200)]">
+            <!-- Explanation Panel (Left - 40% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-1 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm flex flex-col justify-center">
+                <div class="text-xs text-[var(--text-secondary)] uppercase tracking-wide mb-2">What you're seeing</div>
+                <h3 class="text-2xl md:text-3xl font-bold text-[var(--primary-purple)] mb-6">
                     Vendor Price Comparison
                 </h3>
                 
-                <p class="text-[var(--text-secondary)] leading-relaxed mb-6">
-                    This screen compares the same items across multiple vendors to reveal price differences instantly.
-                </p>
-                
-                <!-- Bullet points explaining the image -->
+                <!-- What this screen does -->
                 <div class="mb-6">
-                    <h4 class="text-lg font-semibold text-[var(--text-primary)] mb-3">What you're seeing:</h4>
-                    <ul class="space-y-2 text-[var(--text-secondary)]">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What this screen does</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Compares item prices across multiple vendors. Shows best price, difference amount, and price variance. Supports filters like month, year, and vendor selection.
+                    </p>
+                </div>
+                
+                <!-- What problems it catches -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What problems it catches</h4>
+                    <ul class="space-y-1.5 text-sm text-[var(--text-secondary)]">
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Shows selected vendors and time period (year/month filters)</span>
+                            <span>Overpaying for the same item</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Highlights the best price per item automatically</span>
+                            <span>Inconsistent supplier pricing</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Calculates price difference, percentage difference, and total impact</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Helps identify where margins are leaking</span>
+                            <span>Hidden margin leakage over time</span>
                         </li>
                     </ul>
                 </div>
                 
-                <!-- Outcome section -->
+                <!-- Why this matters -->
                 <div class="mb-4">
-                    <h4 class="text-lg font-semibold text-[var(--text-primary)] mb-3">
-                        <span class="font-bold">Outcome:</span>
-                    </h4>
-                    <ul class="space-y-2 text-[var(--text-secondary)]">
-                        <li class="flex items-start">
-                            <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Buy from the most cost-effective vendor</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Reduce purchase cost without manual comparison</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Make data-backed purchasing decisions</span>
-                        </li>
-                    </ul>
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">Why this matters</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Gives clear, data-backed buying decisions instead of relying on memory or last invoices.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Image Popup Modal -->
+    <!-- Order vs Received Check Modal -->
     <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
         <div class="relative max-w-7xl w-full max-h-[95vh] flex flex-col md:flex-row gap-4 md:gap-6 bg-[var(--neutral-white)] rounded-lg shadow-2xl overflow-hidden">
             <!-- Close button -->
@@ -1060,113 +1052,181 @@
                 &times;
             </button>
             
-            <!-- Image Section (70% on desktop, full width on mobile, appears first on mobile) -->
-            <div class="w-full md:w-[70%] order-2 md:order-1 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
-                <img src="images/ordervspur-scroll.png" alt="Order vs Received Check" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
-            </div>
-            
-            <!-- Explanation Card (30% on desktop, full width on mobile, appears second on mobile) -->
-            <div class="w-full md:w-[30%] order-1 md:order-2 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 md:p-8 overflow-y-auto max-h-[95vh]">
-                <h2 class="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-6 pb-4 border-b border-[var(--neutral-gray-200)]">
+            <!-- Explanation Panel (Left - 40% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-1 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm flex flex-col justify-center">
+                <div class="text-xs text-[var(--text-secondary)] uppercase tracking-wide mb-2">What you're seeing</div>
+                <h3 class="text-2xl md:text-3xl font-bold text-[var(--primary-purple)] mb-6">
                     Order vs Received Analysis
-                </h2>
+                </h3>
                 
-                <!-- What you're seeing -->
+                <!-- What this screen does -->
                 <div class="mb-6">
-                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary-purple)] mr-2"></span>
-                        What you're seeing
-                    </h3>
-                    <p class="text-[var(--text-secondary)] leading-relaxed">
-                        A side-by-side comparison screen that matches your purchase order against what you actually received from the supplier. Each line item shows ordered quantities versus received quantities, highlighting any discrepancies instantly.
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What this screen does</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Compares purchase order data with received stock. Matches items using name and pack size. Automatically highlights mismatches.
                     </p>
                 </div>
                 
                 <!-- What problems it catches -->
                 <div class="mb-6">
-                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary-purple)] mr-2"></span>
-                        What problems it catches
-                    </h3>
-                    <ul class="space-y-2 text-[var(--text-secondary)]">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What problems it catches</h4>
+                    <ul class="space-y-1.5 text-sm text-[var(--text-secondary)]">
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Missing items that were ordered but not delivered</span>
+                            <span>Items received but not ordered</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Quantity mismatches (ordered 100, received 80)</span>
+                            <span>Items ordered but not received</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Pack size changes (ordered strips, received bottles)</span>
+                            <span>Quantity mismatches</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Extra items delivered that weren't in the order</span>
+                            <span>Pack size differences</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Wrong product substitutions</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- How to read this screen -->
-                <div class="mb-6">
-                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary-purple)] mr-2"></span>
-                        How to read this screen
-                    </h3>
-                    <ul class="space-y-2 text-[var(--text-secondary)]">
-                        <li class="flex items-start">
-                            <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Green highlights indicate perfect matches</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Red or yellow highlights flag discrepancies</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Compare the "Ordered" and "Received" columns side-by-side</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Click on any flagged item to see details and take action</span>
+                            <span>Extra or missing stock entries</span>
                         </li>
                     </ul>
                 </div>
                 
                 <!-- Why this matters -->
                 <div class="mb-4">
-                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary-purple)] mr-2"></span>
-                        Why this matters
-                    </h3>
-                    <ul class="space-y-2 text-[var(--text-secondary)]">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">Why this matters</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Helps pharmacy owners catch supplier discrepancies before accepting stock or finalizing payments.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Image Section (Right - 60% on desktop, full width on mobile, appears second on mobile) -->
+            <div class="w-full md:w-[60%] order-2 md:order-2 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
+                <img src="images/ordervspur-scroll.png" alt="Order vs Received Check" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Smarter Ordering Assistant Modal -->
+    <div id="smarterOrderingModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
+        <div class="relative max-w-7xl w-full max-h-[95vh] flex flex-col md:flex-row gap-4 md:gap-6 bg-[var(--neutral-white)] rounded-lg shadow-2xl overflow-hidden">
+            <!-- Close button -->
+            <button onclick="closeSmarterOrderingModal()" class="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-3xl leading-none bg-white bg-opacity-90 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md">
+                &times;
+            </button>
+            
+            <!-- Explanation Panel (Left - 40% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-1 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm flex flex-col justify-center">
+                <div class="text-xs text-[var(--text-secondary)] uppercase tracking-wide mb-2">WHAT YOU'RE SEEING</div>
+                <h3 class="text-2xl md:text-3xl font-bold text-[var(--primary-purple)] mb-6">
+                    Forecast Demand & Smart Ordering
+                </h3>
+                
+                <!-- What this screen does -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What this screen does</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Analyzes historical sales data and predicts future order quantities for each item.
+                    </p>
+                </div>
+                
+                <!-- What problems it solves -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What problems it solves</h4>
+                    <ul class="space-y-1.5 text-sm text-[var(--text-secondary)]">
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Prevents billing errors before they enter your system</span>
+                            <span>Overstocking slow-moving items</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Catches supplier mistakes immediately, not weeks later</span>
+                            <span>Missing fast movers</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Reduces inventory discrepancies and stock confusion</span>
+                            <span>Expiry losses due to wrong ordering</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Saves time by flagging issues at receipt, not during reconciliation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--primary-purple)] mr-2">•</span>
-                            <span>Protects your pharmacy from financial losses from missing or wrong items</span>
+                            <span>Manual guess-based purchasing</span>
                         </li>
                     </ul>
                 </div>
+                
+                <!-- Why this matters -->
+                <div class="mb-4">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">Why this matters</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Helps pharmacy owners place confident orders, reduce expiry, optimize cash flow, and save time.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Image Section (Right - 60% on desktop, full width on mobile, appears second on mobile) -->
+            <div class="w-full md:w-[60%] order-2 md:order-2 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
+                <img src="images/forecast.png" alt="Forecast Demand & Smart Ordering" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Alerts & Reminders Modal -->
+    <div id="paymentModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
+        <div class="relative max-w-7xl w-full max-h-[95vh] flex flex-col md:flex-row gap-4 md:gap-6 bg-[var(--neutral-white)] rounded-lg shadow-2xl overflow-hidden">
+            <!-- Close button -->
+            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-3xl leading-none bg-white bg-opacity-90 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md">
+                &times;
+            </button>
+            
+            <!-- Explanation Panel (Left - 40% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-1 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm flex flex-col justify-center">
+                <div class="text-xs text-[var(--text-secondary)] uppercase tracking-wide mb-2">WHAT YOU'RE SEEING</div>
+                <h3 class="text-2xl md:text-3xl font-bold text-[var(--primary-purple)] mb-6">
+                    Payment Alerts & Follow-ups
+                </h3>
+                
+                <!-- What this screen does -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What this screen does</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Shows upcoming, due, and overdue supplier payments in one place. Highlights priority payments clearly and groups alerts by urgency.
+                    </p>
+                </div>
+                
+                <!-- What problems it catches -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What problems it catches</h4>
+                    <ul class="space-y-1.5 text-sm text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Missed payment deadlines</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Forgotten follow-ups with suppliers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Cash flow blind spots</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Why this matters -->
+                <div class="mb-4">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">Why this matters</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Helps pharmacies stay compliant, avoid penalties, and maintain supplier trust.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Image Section (Right - 60% on desktop, full width on mobile, appears second on mobile) -->
+            <!-- TODO: Replace static image with scrollable payment alerts UI later -->
+            <div class="w-full md:w-[60%] order-2 md:order-2 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
+                <img src="images/paymentalerts1.png" alt="Payment Alerts & Reminders" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
             </div>
         </div>
     </div>
@@ -1272,6 +1332,8 @@
                 closeModal();
                 closeImageModal();
                 closeVendorModal();
+                closePaymentModal();
+                closeSmarterOrderingModal();
             }
         });
 
@@ -1312,6 +1374,46 @@
         document.getElementById('vendorModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeVendorModal();
+            }
+        });
+
+        // Payment Modal functions
+        function openPaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closePaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close payment modal when clicking on backdrop
+        document.getElementById('paymentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePaymentModal();
+            }
+        });
+
+        // Smarter Ordering Modal functions
+        function openSmarterOrderingModal() {
+            const modal = document.getElementById('smarterOrderingModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeSmarterOrderingModal() {
+            const modal = document.getElementById('smarterOrderingModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close smarter ordering modal when clicking on backdrop
+        document.getElementById('smarterOrderingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSmarterOrderingModal();
             }
         });
 
