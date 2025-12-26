@@ -1174,7 +1174,7 @@
                 </div>
                 </div>
                 <div class="mt-6">
-                    <button onclick="closeAndOpenDemo(closeVendorModal)" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
+                    <button onclick="openDemoFromFeature()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
                         Compare vendor prices
                     </button>
                 </div>
@@ -1249,7 +1249,7 @@
                 </div>
                 </div>
                 <div class="mt-6">
-                    <button onclick="closeAndOpenDemo(closeImageModal)" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
+                    <button onclick="openDemoFromFeature()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
                         Verify received stock
                     </button>
                 </div>
@@ -1325,7 +1325,7 @@
                 </div>
                 </div>
                 <div class="mt-6">
-                    <button onclick="closeAndOpenDemo(closeSmarterOrderingModal)" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
+                    <button onclick="openDemoFromFeature()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
                         Start smart ordering now
                     </button>
                 </div>
@@ -1397,7 +1397,7 @@
                 </div>
                 </div>
                 <div class="mt-6">
-                    <button onclick="closeAndOpenDemo(closePaymentModal)" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
+                    <button onclick="openDemoFromFeature()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
                         Manage payment alerts
                     </button>
                 </div>
@@ -1498,15 +1498,9 @@
             document.body.classList.remove('modal-open');
         }
 
-        // Helper function to close feature modal and open demo form
-        function closeAndOpenDemo(closeFunction) {
-            if (closeFunction) {
-                closeFunction();
-            }
-            // Small delay to ensure modal closes before opening demo
-            setTimeout(function() {
-                openModal();
-            }, 100);
+        // Helper function to open demo form without closing feature modal
+        function openDemoFromFeature() {
+            openModal();
         }
 
         // Close modal when clicking on backdrop
@@ -1519,11 +1513,17 @@
         // Close modal on Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeModal();
-                closeImageModal();
-                closeVendorModal();
-                closePaymentModal();
-                closeSmarterOrderingModal();
+                const demoModal = document.getElementById('demoModal');
+                // If demo modal is open, close only the demo modal (keep feature modal open)
+                if (!demoModal.classList.contains('hidden')) {
+                    closeModal();
+                } else {
+                    // Otherwise, close any open feature modals
+                    closeImageModal();
+                    closeVendorModal();
+                    closePaymentModal();
+                    closeSmarterOrderingModal();
+                }
             }
         });
 
