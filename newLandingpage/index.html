@@ -7,16 +7,46 @@
     <title>MediAstraCloud | Pharmacy Management Software</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom brand colors */
+        /* Landify-Inspired Color System */
         :root {
-            --brand-blue: #2563EB;
-            --cloud-cyan: #38BDF8;
-            --infinity-indigo: #4F46E5;
+            /* Primary Palette - Muted Purple-Based */
+            --primary-purple: #6B5CE6;
+            --primary-purple-dark: #5A4FCF;
+            --primary-purple-light: #8B7EE8;
+            --primary-purple-muted: #E8E5F5;
+            
+            /* Secondary Palette - Supporting Purples */
+            --secondary-purple: #7C3AED;
+            --secondary-purple-light: #A78BFA;
+            --secondary-purple-muted: #F3F0FF;
+            
+            /* Accent Palette - Soft Warm */
+            --warm-accent: #F59E0B;
+            --warm-accent-dark: #D97706;
+            --warm-accent-light: #FCD34D;
+            --warm-accent-muted: #FEF3C7;
+            
+            /* Neutral Palette */
+            --neutral-white: #FFFFFF;
+            --neutral-gray-50: #F9FAFB;
+            --neutral-gray-100: #F3F4F6;
+            --neutral-gray-200: #E5E7EB;
+            --neutral-gray-400: #9CA3AF;
+            --neutral-gray-500: #6B7280;
+            --neutral-gray-600: #4B5563;
+            --neutral-gray-900: #111827;
+            
+            /* Text Colors */
+            --text-primary: #111827;
+            --text-secondary: #4B5563;
+            --text-tertiary: #9CA3AF;
+            --text-inverse: #FFFFFF;
         }
         
-        /* Smooth scrolling */
+        /* Smooth scrolling with offset for fixed header */
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
         
         /* Hide scrollbar when modal is open */
@@ -24,67 +54,502 @@
             overflow: hidden;
         }
         
-        /* Gradient backgrounds */
-        .gradient-bg {
-            background: linear-gradient(135deg, #2563EB 0%, #38BDF8 50%, #4F46E5 100%);
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 40;
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
         
-        /* Subtle gradient accent */
-        .gradient-accent {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(56, 189, 248, 0.05) 50%, rgba(79, 70, 229, 0.05) 100%);
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            background: #20BA5A;
         }
+        
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+        
+        .whatsapp-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: var(--text-primary);
+            color: var(--text-inverse);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .whatsapp-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid var(--text-primary);
+        }
+        
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 56px;
+                height: 56px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .whatsapp-float svg {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .whatsapp-tooltip {
+                font-size: 0.75rem;
+                padding: 6px 10px;
+            }
+        }
+        
+        /* Primary Gradient - Purple to Purple */
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+        }
+        
+        /* Subtle Gradient Accent - Very Light Purple */
+        .gradient-accent {
+            background: linear-gradient(135deg, rgba(107, 92, 230, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
+        }
+        
+        /* Vertical Gradient for Feature Accent Bar */
+        .gradient-accent-bar {
+            background: linear-gradient(to bottom, var(--primary-purple), var(--secondary-purple));
+        }
+        
+        /* Premium Hero Background - Dark Purple to Indigo to Near-Black */
+        .hero-gradient-bg {
+            background: linear-gradient(to right, 
+                #5A4A9F 0%, 
+                #4A3A8F 12%, 
+                #3D2E7A 28%, 
+                #2E1F5C 45%, 
+                #1F1638 65%, 
+                #151020 85%, 
+                #0A050F 100%);
+        }
+        
+        /* Final CTA Section - Same Purple Family, Darker & Less Saturated */
+        .cta-gradient-bg {
+            background: linear-gradient(to right, 
+                #4A3A8F 0%, 
+                #3D2E7A 12%, 
+                #2E1F5C 28%, 
+                #1F1638 45%, 
+                #151020 65%, 
+                #0F0A1A 85%, 
+                #080408 100%);
+        }
+        
+        /* Positioning Bridge Section - Soft Bottom Fade (Landify-style) */
+        .positioning-bridge-bg {
+            background: linear-gradient(to top, 
+                #FFFFFF 0%, 
+                #FAFBFC 30%, 
+                #F5F6F7 60%, 
+                #F0F1F2 85%, 
+                #E8EAED 100%);
+        }
+        
+        /* How It Works Closing - Soft Bottom Fade (Landify-style) */
+        .how-it-works-fade-bg {
+            background: linear-gradient(to top, 
+                #FFFFFF 0%, 
+                #FAFBFC 30%, 
+                #F5F6F7 60%, 
+                #F0F1F2 85%, 
+                #E8EAED 100%);
+        }
+        
+        /* Features Section - Zoho-style Background Panel */
+        .features-section-bg {
+            background: linear-gradient(to bottom, 
+                #FFFFFF 0%, 
+                #FFFFFF 20%, 
+                #FAFBFC 80%, 
+                #F5F6F7 100%);
+        }
+        
+        /* Features Section Background - Zoho-style with subtle bottom fade */
+        .features-section-bg {
+            background: linear-gradient(to bottom,
+                #F9FAFB 0%,
+                #F5F6F7 50%,
+                #F3F4F6 100%);
+        }
+        
+        /* Feature Card - Zoho-style Enterprise Panel */
+        .feature-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 1.5rem 1.5rem 1rem 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Feature Image Placeholder - Neutral Zoho-style */
+        .feature-image-placeholder {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.375rem;
+            position: relative;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            margin-bottom: 1.25rem;
+        }
+        
+        .feature-image-placeholder::before {
+            content: 'Feature preview';
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            font-size: 0.75rem;
+            color: #6B7280;
+            font-weight: 400;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+        
+        /* Before/After Cards with Background Images */
+        .before-card-bg {
+            background-image: url('images/Stressedowner.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .before-card-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 0.75rem;
+            z-index: 1;
+        }
+        
+        .before-card-bg > * {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .after-card-bg {
+            background-image: url('images/happyowmner.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .after-card-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 0.75rem;
+            z-index: 1;
+        }
+        
+        .after-card-bg > * {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Zoho-style Feature Cards */
+        .zoho-feature-card {
+            background: #FAFBFC;
+            border-radius: 1.25rem;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .zoho-feature-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .zoho-feature-placeholder {
+            background: #F3F4F6;
+            border: 1px dashed #D1D5DB;
+            border-radius: 0.75rem;
+            position: relative;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            margin-top: auto;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+        
+        .zoho-feature-placeholder::before {
+            content: 'Feature preview';
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 0.75rem;
+            color: #6B7280;
+            font-weight: 400;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+        }
+        
+        /* Zoho-style Section Background */
+        .zoho-section-bg {
+            background: linear-gradient(to bottom,
+                #F9FAFB 0%,
+                #F5F6F7 50%,
+                #F3F4F6 100%);
+        }
+        
+        /* Zoho-style Promotional Banner */
+        .zoho-promo-banner {
+            background: linear-gradient(to right, 
+                #5A4A9F 0%, 
+                #4A3A8F 25%, 
+                #3D2E7A 50%, 
+                #2E1F5C 75%, 
+                #1F1638 100%);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Zoho-style Testimonial Image */
+        .zoho-testimonial-image {
+            border-radius: 1rem;
+            aspect-ratio: 4 / 3;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        /* Premium Hero Card Glow - Enhanced Elevation */
+        .hero-card-glow {
+            box-shadow: none;
+        }
+        
+        /* Narrative Section Image Overlay */
+        .narrative-image-overlay {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .narrative-image-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(90, 74, 159, 0.12) 0%, 
+                rgba(61, 46, 122, 0.13) 50%, 
+                rgba(46, 31, 92, 0.14) 100%);
+            z-index: 1;
+        }
+        
+        .narrative-image-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(10%) brightness(0.95) contrast(1.05) saturate(0.9);
+        }
+        
+        /* Floating Problem Cards - Calm & Informational */
+        .floating-problem-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 0.875rem 1rem;
+            border-radius: 0.625rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            max-width: 180px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .floating-problem-card h4 {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #2E1F5C;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.01em;
+        }
+        
+        .floating-problem-card p {
+            font-size: 0.6875rem;
+            color: #6B7280;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+        
+        /* Additional Problem Cards - Soft Lavender Style */
+        .floating-problem-card-lavender {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(230, 225, 245, 0.95) 0%, rgba(240, 237, 250, 0.95) 100%);
+            backdrop-filter: blur(12px);
+            padding: 0.75rem 0.9375rem;
+            border-radius: 0.625rem;
+            box-shadow: 0 3px 12px rgba(90, 74, 159, 0.12);
+            z-index: 2;
+            max-width: 160px;
+            border-left: 3px solid rgba(90, 74, 159, 0.4);
+        }
+        
+        .floating-problem-card-lavender h4 {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #3D2E7A;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.01em;
+        }
+        
+        .floating-problem-card-lavender p {
+            font-size: 0.625rem;
+            color: #5A4A9F;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+        
+        /* Fixed Header Styling */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            margin: 0;
+            background: linear-gradient(to right, 
+                #5A4A9F 0%, 
+                #4A3A8F 12%, 
+                #3D2E7A 28%, 
+                #2E1F5C 45%, 
+                #1F1638 65%, 
+                #151020 85%, 
+                #0A050F 100%);
+        }
+        
+        /* Remove default margins to eliminate gap */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        
     </style>
 </head>
-<body class="bg-white text-[#0F172A] font-sans antialiased">
+<body class="bg-[var(--neutral-white)] text-[var(--text-primary)] font-sans antialiased">
 
     <!-- Header -->
-    <header class="bg-white py-4 px-4 md:px-6 border-b border-[#E5E7EB]">
-        <div class="max-w-7xl mx-auto flex items-center space-x-3">
-            <img 
-                src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
-                alt="MediAstraCloud" 
-                class="h-8 md:h-10"
-            >
-            <span class="text-lg md:text-xl font-semibold text-[#0F172A]">MediAstra</span>
+    <header class="fixed-header py-4 px-4 md:px-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo + Brand Name -->
+            <div class="flex items-center space-x-3">
+                <img 
+                    src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                    alt="MediAstraCloud" 
+                    class="h-8 md:h-10"
+                >
+                <span class="text-lg md:text-xl font-semibold text-white">MediAstra</span>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#features" class="text-gray-300 hover:text-white text-sm font-medium transition-colors duration-200">Features</a>
+                <a href="#how-it-works" class="text-gray-300 hover:text-white text-sm font-medium transition-colors duration-200">How It Works</a>
+                <a href="#faqs" class="text-gray-300 hover:text-white text-sm font-medium transition-colors duration-200">FAQs</a>
+            </nav>
         </div>
     </header>
+    
+    <!-- Spacer for fixed header -->
+    <div class="h-16"></div>
 
     <!-- Hero Section -->
-    <section class="relative gradient-accent py-16 md:py-24 lg:py-32 px-4">
-        <div class="max-w-6xl mx-auto">
+    <section class="relative hero-gradient-bg py-12 md:py-20 lg:py-28 px-4 overflow-hidden -mt-4">
+        <div class="max-w-6xl mx-auto relative z-10">
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <!-- Left Column - Text Content -->
                 <div class="text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#4F46E5] mb-6 leading-tight">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                         Still guessing how much to order for your pharmacy?
                     </h1>
-                    <div class="text-lg md:text-xl text-[#475569] mb-4 leading-relaxed space-y-2">
+                    <div class="text-lg md:text-xl text-gray-300 mb-4 leading-relaxed space-y-2">
                         <p>Overstocked slow movers.</p>
                         <p>Out-of-stock fast movers.</p>
                         <p>Expiry losses every month.</p>
                     </div>
-                    <p class="text-lg md:text-xl text-[#0F172A] font-semibold mb-8">
+                    <p class="text-lg md:text-xl text-gray-200 font-semibold mb-8">
                         Start fixing this — free — without changing your billing system.
                     </p>
-                    <button onclick="openModal()" class="gradient-bg text-white font-semibold text-lg px-8 py-4 rounded-full hover:opacity-90 transition-opacity shadow-lg">
+                    <button onclick="openModal()" class="bg-[var(--primary-purple)] text-white font-semibold text-lg px-8 py-4 rounded-full hover:bg-[var(--primary-purple-dark)] transition-all shadow-2xl hover:shadow-[0_0_40px_rgba(107,92,230,0.5)] hover:scale-105 brightness-110 hover:brightness-115">
                         See How This Works for Your Store (Free)
                     </button>
                 </div>
                 
-                <!-- Right Column - Visual Placeholder -->
+                <!-- Right Column - Video -->
                 <div class="order-first md:order-last">
-                    <div class="bg-[#F1F5F9] border-2 border-[#E5E7EB] rounded-2xl p-12 md:p-16 flex flex-col items-center justify-center min-h-[300px] md:min-h-[400px]">
-                        <div class="text-center">
-                            <div class="w-16 h-16 mx-auto mb-4 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#38BDF8] opacity-20"></div>
-                            <div class="space-y-2 mb-4">
-                                <div class="h-2 w-32 mx-auto bg-[#CBD5E1] rounded"></div>
-                                <div class="h-2 w-24 mx-auto bg-[#CBD5E1] rounded"></div>
-                                <div class="h-2 w-28 mx-auto bg-[#CBD5E1] rounded"></div>
-                            </div>
-                            <p class="text-[#64748B] text-xs mt-6">
-                                Sample dashboard view<br>Demo uses your actual data
-                            </p>
-                        </div>
+                    <div class="rounded-2xl overflow-hidden min-h-[300px] md:min-h-[400px]">
+                        <iframe 
+                            class="w-full h-full min-h-[300px] md:min-h-[400px] rounded-2xl"
+                            src="https://www.youtube.com/embed/ABah-rVEXzg" 
+                            title="MediAstraCloud Demo"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen
+                            style="aspect-ratio: 16/9;"
+                        ></iframe>
                     </div>
                 </div>
             </div>
@@ -92,320 +557,407 @@
     </section>
 
     <!-- Trust Line -->
-    <section class="bg-white py-8 px-4 border-b border-[#E5E7EB]">
+    <section class="bg-[var(--neutral-white)] py-8 px-4 border-b border-[var(--neutral-gray-200)]">
         <div class="max-w-4xl mx-auto text-center">
-            <p class="text-[#475569] text-sm md:text-base">
+            <p class="text-[var(--text-secondary)] text-sm md:text-base">
                 These tools are free to use and form the starter layer of our complete Pharmacy Billing System.
             </p>
         </div>
     </section>
 
     <!-- Problem Story Section -->
-    <section class="bg-[#F8FAFC] py-16 md:py-20 px-4">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-[#4F46E5] mb-8 text-center">
-                If you run a pharmacy, this is familiar.
+    <section class="bg-[var(--neutral-gray-50)] py-16 md:py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-12 text-center">
+                If you run a pharmacy, this moment will feel familiar.
             </h2>
-            <div class="space-y-4 text-[#475569] text-lg leading-relaxed">
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[#2563EB] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>You sit down to place an order.</p>
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <!-- Left Column - Contextual Image -->
+                <div class="order-2 md:order-1">
+                    <div class="narrative-image-overlay relative h-[400px] md:h-[500px]">
+                        <img 
+                            src="images/pharmacyowner.png" 
+                            alt="Pharmacy owner reviewing bills and managing orders in a real pharmacy"
+                            class="w-full h-full object-cover"
+                        >
+                    </div>
                 </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[#2563EB] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>You check last month's bill.</p>
+                
+                <!-- Right Column - Text Content -->
+                <div class="order-1 md:order-2 space-y-4 text-[var(--text-secondary)] text-lg leading-relaxed">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>You sit down to place an order — usually at the end of a long day.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>You open last month's bills to see what moved.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>You ask your staff what's running low.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>You rely on experience, memory, and instinct.</p>
+                    </div>
+                    <p class="font-semibold text-[var(--text-primary)] pt-4">And still…</p>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>Some medicines quietly expire on the shelf.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>Fast-moving items run out unexpectedly.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>Capital stays blocked in slow stock.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-1 h-6 bg-[var(--primary-purple)] rounded-full mt-1 flex-shrink-0"></div>
+                        <p>Margins shrink without any clear warning.</p>
+                    </div>
+                    <p class="font-semibold text-[var(--text-primary)] pt-4">Not because you're careless —<br>but because most ordering decisions are still made on guesswork.</p>
                 </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[#2563EB] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>You ask your staff.</p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[#2563EB] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>You rely on experience.</p>
-                </div>
-                <p class="font-semibold text-[#0F172A] pt-4">And still…</p>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[#2563EB] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>Some items expire.</p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[#2563EB] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>Some fast movers go out of stock.</p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[#2563EB] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>Capital gets blocked.</p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-1 h-6 bg-[#2563EB] rounded-full mt-1 flex-shrink-0"></div>
-                    <p>Margins quietly drop.</p>
-                </div>
-                <p class="font-semibold text-[#0F172A] pt-4">Not because you're careless —<br>but because ordering is still based on guesswork.</p>
             </div>
         </div>
     </section>
 
     <!-- Problem Clarity Section -->
-    <section class="bg-white py-16 md:py-20 px-4">
+    <section class="bg-[var(--neutral-white)] py-8 md:py-10 px-2">
         <div class="max-w-3xl mx-auto text-center">
-            <div class="space-y-3 text-lg md:text-xl text-[#475569] leading-relaxed mb-6">
+            <div class="space-y-3 text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed mb-6">
                 <p>Sales patterns change.</p>
-                <p>Seasonal demand changes.</p>
-                <p>Customer behaviour changes.</p>
+                <p>Seasonal demand shifts.</p>
+                <p>Customer buying behaviour evolves.</p>
             </div>
-            <p class="text-lg md:text-xl text-[#0F172A] font-semibold">
-                But the way orders are placed often doesn't.
+            <p class="text-lg md:text-xl text-[var(--text-primary)] font-semibold">
+                But the way orders are placed often stays the same.
             </p>
-            <p class="text-lg text-[#475569] mt-6">
-                That's why the same problems repeat — month after month.
+            <p class="text-lg text-[var(--text-secondary)] mt-6">
+                So the same problems return —<br>cycle after cycle,<br>month after month.
             </p>
         </div>
     </section>
 
     <!-- Solution Section -->
-    <section class="bg-[#F8FAFC] py-16 md:py-20 px-4">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-[#4F46E5] mb-6 text-center">
+    <section class="zoho-section-bg ">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-6 text-center">
                 Smarter Ordering — Free to Start
             </h2>
-            <p class="text-lg text-[#475569] text-center mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-lg text-[var(--text-secondary)] text-center mb-12 max-w-2xl mx-auto leading-relaxed">
                 We built a simple ordering assistant for pharmacy owners.
             </p>
             
             <!-- Before/After Comparison -->
-            <div class="grid md:grid-cols-2 gap-6 mb-12">
+            <div class="grid md:grid-cols-2 gap-30 md:gap-40 mb-12">
                 <!-- Before Card -->
-                <div class="bg-[#F1F5F9] border-2 border-[#E5E7EB] rounded-xl p-8">
+                <div class="before-card-bg border-2 border-[var(--neutral-gray-200)] rounded-xl p-8">
                     <div class="text-center mb-6">
-                        <span class="inline-block bg-[#94A3B8] text-white text-sm font-semibold px-4 py-1 rounded-full">Before</span>
+                        <span class="inline-block bg-white bg-opacity-90 text-gray-800 text-sm font-semibold px-4 py-1 rounded-full shadow-md">Before</span>
                     </div>
-                    <div class="space-y-3 text-[#64748B]">
-                        <p class="flex items-center">
-                            <span class="mr-2">❌</span>
+                    <div class="bg-black bg-opacity-50 rounded-lg p-4 space-y-3 text-white">
+                        <p class="flex items-center font-medium">
+                            <span class="mr-2 text-xl">❌</span>
                             <span>Manual guesswork</span>
                         </p>
-                        <p class="flex items-center">
-                            <span class="mr-2">❌</span>
+                        <p class="flex items-center font-medium">
+                            <span class="mr-2 text-xl">❌</span>
                             <span>Frequent expiry losses</span>
                         </p>
-                        <p class="flex items-center">
-                            <span class="mr-2">❌</span>
+                        <p class="flex items-center font-medium">
+                            <span class="mr-2 text-xl">❌</span>
                             <span>Stock-outs surprise you</span>
                         </p>
-                        <p class="flex items-center">
-                            <span class="mr-2">❌</span>
+                        <p class="flex items-center font-medium">
+                            <span class="mr-2 text-xl">❌</span>
                             <span>Blocked capital</span>
                         </p>
                     </div>
-                    <div class="mt-6 pt-6 border-t border-[#CBD5E1]">
-                        <div class="bg-white rounded-lg p-4 min-h-[100px] flex items-center justify-center">
-                            <p class="text-[#94A3B8] text-sm">Spreadsheet chaos</p>
+                    <div class="mt-6 pt-6 border-t border-white border-opacity-30">
+                        <div class="bg-white bg-opacity-90 rounded-lg p-4 min-h-[100px] flex items-center justify-center shadow-md">
+                            <p class="text-gray-800 text-sm font-medium">Spreadsheet chaos</p>
                         </div>
                     </div>
                 </div>
                 
                 <!-- After Card -->
-                <div class="bg-white border-2 border-[#38BDF8] rounded-xl p-8 shadow-md">
+                <div class="after-card-bg border-2 border-[var(--primary-purple)] rounded-xl p-8 shadow-md">
                     <div class="text-center mb-6">
-                        <span class="inline-block bg-[#2563EB] text-white text-sm font-semibold px-4 py-1 rounded-full">After</span>
+                        <span class="inline-block bg-white bg-opacity-90 text-[var(--primary-purple)] text-sm font-semibold px-4 py-1 rounded-full shadow-md">After</span>
                     </div>
-                    <div class="space-y-3 text-[#0F172A]">
-                        <p class="flex items-center">
-                            <span class="mr-2">✓</span>
-                            <span class="font-medium">Data-driven suggestions</span>
+                    <div class="bg-black bg-opacity-50 rounded-lg p-4 space-y-3 text-white">
+                        <p class="flex items-center font-medium">
+                            <span class="mr-2 text-xl">✓</span>
+                            <span>Data-driven suggestions</span>
                         </p>
-                        <p class="flex items-center">
-                            <span class="mr-2">✓</span>
-                            <span class="font-medium">Reduced expiry</span>
+                        <p class="flex items-center font-medium">
+                            <span class="mr-2 text-xl">✓</span>
+                            <span>Reduced expiry</span>
                         </p>
-                        <p class="flex items-center">
-                            <span class="mr-2">✓</span>
-                            <span class="font-medium">Fast movers in stock</span>
+                        <p class="flex items-center font-medium">
+                            <span class="mr-2 text-xl">✓</span>
+                            <span>Fast movers in stock</span>
                         </p>
-                        <p class="flex items-center">
-                            <span class="mr-2">✓</span>
-                            <span class="font-medium">Optimized inventory</span>
+                        <p class="flex items-center font-medium">
+                            <span class="mr-2 text-xl">✓</span>
+                            <span>Optimized inventory</span>
                         </p>
                     </div>
-                    <div class="mt-6 pt-6 border-t border-[#E5E7EB]">
-                        <div class="gradient-accent rounded-lg p-4 min-h-[100px] flex items-center justify-center border border-[#38BDF8]">
-                            <p class="text-[#2563EB] text-sm font-semibold">Smart order dashboard</p>
+                    <div class="mt-6 pt-6 border-t border-white border-opacity-30">
+                        <div class="bg-white bg-opacity-90 rounded-lg p-4 min-h-[100px] flex items-center justify-center border-2 border-[var(--primary-purple)] shadow-md">
+                            <p class="text-[var(--primary-purple)] text-sm font-semibold">Smart order dashboard</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-white rounded-xl p-8 md:p-10 mb-10 border border-[#E5E7EB]">
-                <div class="space-y-4 text-[#475569] text-lg leading-relaxed mb-8">
-                    <p>Upload your regular sales data.</p>
-                    <p>The system analyses demand, stock movement, and trends.</p>
-                    <p>It shows clear suggested order quantities — item by item.</p>
+            <!-- Zoho-style Promotional Banner -->
+            <div class="zoho-promo-banner rounded-2xl p-8 md:p-12 mb-12">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <!-- Left Section -->
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+                            Revolutionize the way you order with smart suggestions
+                        </h3>
+                        <button onclick="openModal()" class="bg-[var(--primary-purple)] text-white font-semibold text-lg px-8 py-4 rounded-lg hover:bg-[var(--primary-purple-dark)] transition-colors shadow-lg hover:shadow-xl">
+                            Make your next order smarter
+                        </button>
+                    </div>
+                    
+                    <!-- Right Section -->
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 leading-tight">
+                            Go smart! Make data-driven ordering decisions while staying in control every step.
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 rounded-full bg-[var(--primary-purple)] flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-sm font-bold">✓</span>
+                                </div>
+                                <p class="text-white text-lg"><span class="font-semibold">Order the right quantity</span></p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 rounded-full bg-[var(--primary-purple)] flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-sm font-bold">✓</span>
+                                </div>
+                                <p class="text-white text-lg"><span class="font-semibold">Reduce expiry losses</span></p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 rounded-full bg-[var(--primary-purple)] flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-sm font-bold">✓</span>
+                                </div>
+                                <p class="text-white text-lg"><span class="font-semibold">Avoid stock-outs of fast movers</span></p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 rounded-full bg-[var(--primary-purple)] flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-sm font-bold">✓</span>
+                                </div>
+                                <p class="text-white text-lg"><span class="font-semibold">Stop guessing every order cycle</span></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-[#0F172A] font-semibold text-lg">
-                    You stay in control.<br>
-                    You can edit everything before ordering.
-                </p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6 mb-12">
-                <div class="flex items-start space-x-3">
-                    <div class="w-2 h-2 rounded-full bg-[#38BDF8] mt-2 flex-shrink-0"></div>
-                    <p class="text-[#0F172A]"><span class="font-semibold">Order the right quantity</span></p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-2 h-2 rounded-full bg-[#38BDF8] mt-2 flex-shrink-0"></div>
-                    <p class="text-[#0F172A]"><span class="font-semibold">Reduce expiry losses</span></p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-2 h-2 rounded-full bg-[#38BDF8] mt-2 flex-shrink-0"></div>
-                    <p class="text-[#0F172A]"><span class="font-semibold">Avoid stock-outs of fast movers</span></p>
-                </div>
-                <div class="flex items-start space-x-3">
-                    <div class="w-2 h-2 rounded-full bg-[#38BDF8] mt-2 flex-shrink-0"></div>
-                    <p class="text-[#0F172A]"><span class="font-semibold">Stop guessing every order cycle</span></p>
-                </div>
-            </div>
-            <div class="text-center">
-                <button onclick="openModal()" class="bg-[#2563EB] text-white font-semibold text-lg px-8 py-4 rounded-full hover:bg-[#4F46E5] transition-colors shadow-md">
-                    Watch a 2-Minute Free Demo
-                </button>
             </div>
         </div>
     </section>
 
     <!-- How It Works Section -->
-    <section class="bg-white py-16 md:py-20 px-4">
+    <section id="how-it-works" class="how-it-works-fade-bg pt-16">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-[#4F46E5] mb-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-12 text-center">
                 How It Fits Into Your Day
             </h2>
             
             <!-- Flow Cards Container -->
             <div class="grid md:grid-cols-4 gap-6 mb-10 relative">
                 <!-- Step 1 -->
-                <div class="bg-white border-2 border-[#E5E7EB] rounded-xl p-6 hover:border-[#38BDF8] transition-colors relative">
-                    <div class="w-12 h-12 rounded-full bg-[#38BDF8] text-white text-xl font-bold flex items-center justify-center mb-4">
+                <div class="bg-[var(--neutral-white)] border-2 border-[var(--neutral-gray-200)] rounded-xl p-6 hover:border-[var(--primary-purple)] transition-colors relative">
+                    <div class="w-12 h-12 rounded-full bg-[var(--primary-purple)] text-[var(--text-inverse)] text-xl font-bold flex items-center justify-center mb-4">
                         1
                     </div>
-                    <h3 class="text-lg font-semibold text-[#0F172A] mb-2">Upload your sales data</h3>
-                    <p class="text-sm text-[#475569]">Excel or CSV works fine</p>
+                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-2">Upload your sales data</h3>
+                    <p class="text-sm text-[var(--text-secondary)]">Excel or CSV works fine</p>
                     <!-- Arrow indicator for desktop -->
-                    <div class="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 text-[#38BDF8] text-2xl">
+                    <div class="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 text-[var(--primary-purple)] text-2xl">
                         →
                     </div>
                 </div>
                 
                 <!-- Step 2 -->
-                <div class="bg-white border-2 border-[#E5E7EB] rounded-xl p-6 hover:border-[#2563EB] transition-colors relative">
-                    <div class="w-12 h-12 rounded-full bg-[#2563EB] text-white text-xl font-bold flex items-center justify-center mb-4">
+                <div class="bg-[var(--neutral-white)] border-2 border-[var(--neutral-gray-200)] rounded-xl p-6 hover:border-[var(--primary-purple)] transition-colors relative">
+                    <div class="w-12 h-12 rounded-full bg-[var(--secondary-purple)] text-[var(--text-inverse)] text-xl font-bold flex items-center justify-center mb-4">
                         2
                     </div>
-                    <h3 class="text-lg font-semibold text-[#0F172A] mb-2">Review suggested quantities</h3>
-                    <p class="text-sm text-[#475569]">Clear, item-by-item view</p>
+                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-2">Review suggested quantities</h3>
+                    <p class="text-sm text-[var(--text-secondary)]">Clear, item-by-item view</p>
                     <!-- Arrow indicator for desktop -->
-                    <div class="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 text-[#2563EB] text-2xl">
+                    <div class="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 text-[var(--primary-purple)] text-2xl">
                         →
                     </div>
                 </div>
                 
                 <!-- Step 3 -->
-                <div class="bg-white border-2 border-[#E5E7EB] rounded-xl p-6 hover:border-[#4F46E5] transition-colors relative">
-                    <div class="w-12 h-12 rounded-full bg-[#4F46E5] text-white text-xl font-bold flex items-center justify-center mb-4">
+                <div class="bg-[var(--neutral-white)] border-2 border-[var(--neutral-gray-200)] rounded-xl p-6 hover:border-[var(--primary-purple)] transition-colors relative">
+                    <div class="w-12 h-12 rounded-full bg-[var(--primary-purple-dark)] text-[var(--text-inverse)] text-xl font-bold flex items-center justify-center mb-4">
                         3
                     </div>
-                    <h3 class="text-lg font-semibold text-[#0F172A] mb-2">Adjust if required</h3>
-                    <p class="text-sm text-[#475569]">You stay in control</p>
+                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-2">Adjust if required</h3>
+                    <p class="text-sm text-[var(--text-secondary)]">You stay in control</p>
                     <!-- Arrow indicator for desktop -->
-                    <div class="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 text-[#4F46E5] text-2xl">
+                    <div class="hidden md:block absolute -right-3 top-1/2 transform -translate-y-1/2 text-[var(--primary-purple)] text-2xl">
                         →
                     </div>
                 </div>
                 
                 <!-- Step 4 -->
-                <div class="bg-white border-2 border-[#E5E7EB] rounded-xl p-6 hover:border-[#38BDF8] transition-colors">
-                    <div class="w-12 h-12 rounded-full bg-[#38BDF8] text-white text-xl font-bold flex items-center justify-center mb-4">
+                <div class="bg-[var(--neutral-white)] border-2 border-[var(--neutral-gray-200)] rounded-xl p-6 hover:border-[var(--primary-purple)] transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-[var(--primary-purple)] text-[var(--text-inverse)] text-xl font-bold flex items-center justify-center mb-4">
                         4
                     </div>
-                    <h3 class="text-lg font-semibold text-[#0F172A] mb-2">Download & place order</h3>
-                    <p class="text-sm text-[#475569]">Ready to send to suppliers</p>
+                    <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-2">Download & place order</h3>
+                    <p class="text-sm text-[var(--text-secondary)]">Ready to send to suppliers</p>
                 </div>
             </div>
             
-            <div class="text-center space-y-2 text-[#475569] text-lg mt-12">
+            <div class="text-center space-y-2 text-lg text-[var(--text-secondary)] mt-12">
                 <p>No billing changes.</p>
                 <p>No staff retraining.</p>
                 <p>No disruption.</p>
-                <p class="text-[#0F172A] font-semibold pt-2">That's why it's free to start.</p>
+                <p class="text-[var(--text-primary)] font-semibold pt-2">That's why it's free to start.</p>
+            </div>
+            <div class="text-center mt-8 mb-4">
+                <button onclick="openModal()" class="bg-[var(--primary-purple)] text-white font-semibold text-lg px-8 py-4 rounded-full hover:bg-[var(--primary-purple-dark)] transition-all shadow-2xl hover:shadow-[0_0_40px_rgba(107,92,230,0.5)] hover:scale-105 brightness-110 hover:brightness-115">
+                    Start free, decide later
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Testimonial Section -->
-    <section class="bg-[#F8FAFC] py-16 md:py-20 px-4">
-        <div class="max-w-3xl mx-auto">
-            <div class="bg-white rounded-2xl p-8 md:p-12 border border-[#E5E7EB]">
-                <p class="text-lg md:text-xl text-[#0F172A] mb-6 leading-relaxed italic">
-                    "Earlier we used to overstock some items and miss fast movers. Now ordering is clear. We reduced expiry and feel confident while placing orders."
-                </p>
-                <div class="border-t border-[#E5E7EB] pt-6">
-                    <p class="font-semibold text-[#0F172A]">Retail Pharmacy Owner</p>
+    <section class="bg-[var(--neutral-gray-50)] pt-8 md:pt-12 pb-16 md:pb-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="bg-[var(--neutral-white)] rounded-2xl p-8 md:p-12 border border-[var(--neutral-gray-200)] shadow-sm">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <!-- Left: Image Container -->
+                    <div class="order-2 md:order-1">
+                        <div class="zoho-testimonial-image">
+                            <img src="images/testomonialpic.png" alt="Pharma Hub Owner" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Testimonial Content -->
+                    <div class="order-1 md:order-2">
+                        <p class="text-xl md:text-2xl text-[var(--text-primary)] mb-6 leading-relaxed font-medium">
+                            "Earlier we used to overstock some items and miss fast movers. Now ordering is clear. We reduced expiry and feel confident while placing orders."
+                        </p>
+                        <div class="pt-4">
+                            <p class="text-base md:text-lg font-semibold text-[var(--text-primary)]">— Pharma Hub Owner</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Expansion Section -->
-    <section class="bg-white py-16 md:py-20 px-4">
-        <div class="max-w-4xl mx-auto">
-            <p class="text-lg text-[#475569] text-center mb-12 max-w-2xl mx-auto leading-relaxed">
+    <section class="hero-gradient-bg py-16 md:py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-lg text-gray-300 text-center mb-12 max-w-2xl mx-auto leading-relaxed">
                 Once pharmacy owners started using this, they asked for help with more daily problems.
             </p>
-            <p class="text-lg text-[#0F172A] font-semibold text-center mb-12">
+            <p class="text-lg text-white font-semibold text-center mb-12">
                 So we added a few focused tools — all inside the same free starter login.
             </p>
-            <h2 class="text-3xl md:text-4xl font-bold text-[#4F46E5] mb-10 text-center">
+            <h2 id="features" class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
                 Free Starter Layer Features
             </h2>
-            <div class="grid md:grid-cols-2 gap-6 mb-10">
-                <!-- Primary Feature Card - Smarter Ordering Assistant -->
-                <div class="md:col-span-2 bg-white rounded-xl p-8 border-2 border-[#E5E7EB] shadow-lg relative overflow-hidden">
-                    <!-- Gradient top border -->
-                    <div class="absolute top-0 left-0 right-0 h-1 gradient-bg"></div>
-                    <!-- Most Used Label -->
-                    <div class="inline-block bg-[#2563EB] text-white text-xs font-semibold px-3 py-1 rounded-full mb-4">
+            
+            <!-- Feature Cards - Zoho-style Uniform Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <!-- Feature Card 1 - Smarter Ordering Assistant -->
+                <div class="feature-card">
+                    <div class="mb-3">
+                        <img 
+                            src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                            alt="MediAstra" 
+                            class="h-6 opacity-60"
+                        >
+                    </div>
+                    <div class="inline-block bg-[var(--primary-purple)] text-[var(--text-inverse)] text-xs font-semibold px-1.5 py-0.5 rounded-full mb-4 w-fit">
                         Most Used
                     </div>
-                    <div class="flex flex-col md:flex-row md:items-start md:space-x-6">
-                        <div class="flex-grow">
-                            <div class="w-1 h-16 bg-gradient-to-b from-[#2563EB] to-[#38BDF8] rounded-full mb-4"></div>
-                            <h3 class="text-2xl font-bold text-[#0F172A] mb-3">Smarter Ordering Assistant</h3>
-                            <p class="text-lg text-[#475569] leading-relaxed">Get suggested order quantities based on your sales patterns and trends. Reduce expiry losses and avoid stock-outs with data-driven recommendations.</p>
-                        </div>
-                        <div class="mt-6 md:mt-0">
-                            <button onclick="openModal()" class="bg-[#2563EB] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#4F46E5] transition-colors whitespace-nowrap">
-                                Try This Free
-                            </button>
-                        </div>
+                    <div class="cursor-pointer" onclick="openSmarterOrderingModal()">
+                        <img src="images/forecast.png" alt="Forecast Demand & Smart Ordering" class="w-full h-auto rounded-md mb-3 hover:opacity-90 transition-opacity" style="max-height: 200px; object-fit: cover; object-position: top;">
                     </div>
+                    <h3 class="text-xl md:text-2xl font-semibold text-[var(--text-primary)] mb-2">Smarter Ordering Assistant</h3>
+                    <p class="text-base text-[var(--text-secondary)] leading-relaxed mb-4">Get suggested order quantities based on your sales patterns and trends. Reduce expiry losses and avoid stock-outs with data-driven recommendations.</p>
+                    <button onclick="openModal()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors mt-auto">
+                        Start smart ordering now
+                    </button>
                 </div>
                 
-                <!-- Secondary Feature Cards -->
-                <div class="bg-[#F8FAFC] rounded-lg p-6 border border-[#E5E7EB]">
-                    <div class="w-1 h-10 bg-[#38BDF8] rounded-full mb-4 opacity-70"></div>
-                    <h3 class="text-lg font-semibold text-[#0F172A] mb-2">Vendor Price Comparison</h3>
-                    <p class="text-sm text-[#475569]">Compare supplier prices before ordering and spot cost differences.</p>
+                <!-- Feature Card 2 - Vendor Price Comparison -->
+                <div class="feature-card">
+                    <div class="mb-3">
+                        <img 
+                            src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                            alt="MediAstra" 
+                            class="h-6 opacity-60"
+                        >
+                    </div>
+                    <div class="cursor-pointer" onclick="openVendorModal()">
+                        <img src="images/vendor_pricing_merged_scroll.png" alt="Vendor Price Comparison" class="w-full h-auto rounded-md mb-3 hover:opacity-90 transition-opacity" style="max-height: 200px; object-fit: cover; object-position: top;">
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-semibold text-[var(--text-primary)] mb-2">Vendor Price Comparison</h3>
+                    <p class="text-base text-[var(--text-secondary)] leading-relaxed mb-4">Compare prices across vendors for the same product and clearly spot cost variations. Make confident purchasing decisions by choosing the most cost-effective supplier every time, without manual comparisons or guesswork.</p>
+                    <button onclick="openModal()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors mt-auto">
+                        Compare vendor prices
+                    </button>
                 </div>
-                <div class="bg-[#F8FAFC] rounded-lg p-6 border border-[#E5E7EB]">
-                    <div class="w-1 h-10 bg-[#2563EB] rounded-full mb-4 opacity-70"></div>
-                    <h3 class="text-lg font-semibold text-[#0F172A] mb-2">Order vs Received Check</h3>
-                    <p class="text-sm text-[#475569]">Instantly identify missing items, quantity mismatches, or pack changes.</p>
+                
+                <!-- Feature Card 3 - Order vs Received Check -->
+                <div class="feature-card">
+                    <div class="mb-3">
+                        <img 
+                            src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                            alt="MediAstra" 
+                            class="h-6 opacity-60"
+                        >
+                    </div>
+                    <div class="cursor-pointer" onclick="openImageModal()">
+                        <img src="images/ordervspur-scroll.png" alt="Order vs Received Check" class="w-full h-auto rounded-md mb-3 hover:opacity-90 transition-opacity" style="max-height: 200px; object-fit: cover; object-position: top;">
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-semibold text-[var(--text-primary)] mb-2">Order vs Received Check</h3>
+                    <p class="text-base text-[var(--text-secondary)] leading-relaxed mb-4">Automatically match what you ordered with what was actually received from the supplier. This helps you catch missing items, quantity mismatches, or pack changes immediately, before stock entry or billing errors occur.</p>
+                    <button onclick="openModal()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors mt-auto">
+                        Verify received stock
+                    </button>
                 </div>
-                <div class="bg-[#F8FAFC] rounded-lg p-6 border border-[#E5E7EB] md:col-span-2">
-                    <div class="w-1 h-10 bg-[#4F46E5] rounded-full mb-4 opacity-70"></div>
-                    <h3 class="text-lg font-semibold text-[#0F172A] mb-2">Payment Alerts & Reminders</h3>
-                    <p class="text-sm text-[#475569]">Notify suppliers after payment and send reminders to customers with pending dues.</p>
+                
+                <!-- Feature Card 4 - Payment Alerts & Reminders -->
+                <div class="feature-card">
+                    <div class="mb-3">
+                        <img 
+                            src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                            alt="MediAstra" 
+                            class="h-6 opacity-60"
+                        >
+                    </div>
+                    <div class="cursor-pointer" onclick="openPaymentModal()">
+                        <img src="images/paymentalerts_scroll.png" alt="Payment Alerts & Reminders" class="w-full h-auto rounded-md mb-3 hover:opacity-90 transition-opacity" style="max-height: 200px; object-fit: cover; object-position: top;">
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-semibold text-[var(--text-primary)] mb-2">Payment Alerts & Reminders</h3>
+                    <p class="text-base text-[var(--text-secondary)] leading-relaxed mb-4">Track payments clearly and send timely alerts to suppliers after settlement, while also reminding customers about pending dues. This reduces follow-ups, avoids missed communications, and helps maintain smooth cash flow.</p>
+                    <button onclick="openModal()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors mt-auto">
+                        Manage payment alerts
+                    </button>
                 </div>
             </div>
-            <div class="text-center space-y-2 text-lg text-[#475569]">
+            
+            <div class="text-center space-y-2 text-lg text-gray-300">
                 <p>Use only what helps you.</p>
                 <p>Ignore the rest.</p>
             </div>
@@ -413,18 +965,18 @@
     </section>
 
     <!-- Positioning Bridge Section -->
-    <section class="bg-[#F8FAFC] py-16 md:py-20 px-4">
+    <section class="positioning-bridge-bg py-16 md:py-20 px-4">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="text-lg md:text-xl text-[#0F172A] font-semibold mb-6 leading-relaxed">
+            <p class="text-lg md:text-xl text-[var(--text-primary)] font-semibold mb-6 leading-relaxed">
                 These tools are not separate products.
             </p>
-            <p class="text-lg text-[#475569] mb-8 leading-relaxed">
+            <p class="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed">
                 They are the starter layer of our full Pharmacy Billing System.
             </p>
-            <p class="text-lg text-[#475569] leading-relaxed">
+            <p class="text-lg text-[var(--text-secondary)] leading-relaxed">
                 Many stores begin here, build confidence, and later choose to connect billing, stock, GST, and reports — only when they're ready.
             </p>
-            <div class="mt-10 space-y-2 text-lg text-[#0F172A] font-semibold">
+            <div class="mt-10 space-y-2 text-lg text-[var(--text-primary)] font-semibold">
                 <p>No pressure.</p>
                 <p>No forced upgrade.</p>
             </div>
@@ -432,75 +984,75 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="bg-white py-16 md:py-20 px-4">
+    <section id="faqs" class="bg-[var(--neutral-white)] py-16 md:py-20 px-4">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-[#4F46E5] mb-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary-purple)] mb-6 text-center">
                 Frequently asked questions
             </h2>
-            <p class="text-center text-[#475569] mb-10">
+            <p class="text-center text-[var(--text-secondary)] mb-10">
                 These are common questions pharmacy owners ask before the demo.
             </p>
             <div class="space-y-4">
                 <!-- FAQ 1 -->
-                <div class="bg-[#F8FAFC] rounded-lg border border-[#E5E7EB] overflow-hidden">
-                    <button onclick="toggleFAQ(1)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-white transition-colors">
-                        <span class="font-semibold text-[#0F172A] pr-4">Are these tools really free?</span>
-                        <span id="faq-icon-1" class="text-[#2563EB] text-xl flex-shrink-0">+</span>
+                <div class="bg-[var(--neutral-gray-50)] rounded-lg border border-[var(--neutral-gray-200)] overflow-hidden">
+                    <button onclick="toggleFAQ(1)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-[var(--neutral-white)] transition-colors">
+                        <span class="font-semibold text-[var(--text-primary)] pr-4">Are these tools really free?</span>
+                        <span id="faq-icon-1" class="text-[var(--primary-purple)] text-xl flex-shrink-0">+</span>
                     </button>
                     <div id="faq-content-1" class="hidden px-6 pb-5">
-                        <p class="text-[#475569] leading-relaxed">
+                        <p class="text-[var(--text-secondary)] leading-relaxed">
                             Yes. The starter layer is free to use.
                         </p>
                     </div>
                 </div>
 
                 <!-- FAQ 2 -->
-                <div class="bg-[#F8FAFC] rounded-lg border border-[#E5E7EB] overflow-hidden">
-                    <button onclick="toggleFAQ(2)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-white transition-colors">
-                        <span class="font-semibold text-[#0F172A] pr-4">Do I need to use all the tools?</span>
-                        <span id="faq-icon-2" class="text-[#2563EB] text-xl flex-shrink-0">+</span>
+                <div class="bg-[var(--neutral-gray-50)] rounded-lg border border-[var(--neutral-gray-200)] overflow-hidden">
+                    <button onclick="toggleFAQ(2)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-[var(--neutral-white)] transition-colors">
+                        <span class="font-semibold text-[var(--text-primary)] pr-4">Do I need to use all the tools?</span>
+                        <span id="faq-icon-2" class="text-[var(--primary-purple)] text-xl flex-shrink-0">+</span>
                     </button>
                     <div id="faq-content-2" class="hidden px-6 pb-5">
-                        <p class="text-[#475569] leading-relaxed">
+                        <p class="text-[var(--text-secondary)] leading-relaxed">
                             No. Start with just one.
                         </p>
                     </div>
                 </div>
 
                 <!-- FAQ 3 -->
-                <div class="bg-[#F8FAFC] rounded-lg border border-[#E5E7EB] overflow-hidden">
-                    <button onclick="toggleFAQ(3)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-white transition-colors">
-                        <span class="font-semibold text-[#0F172A] pr-4">Will this replace my billing software?</span>
-                        <span id="faq-icon-3" class="text-[#2563EB] text-xl flex-shrink-0">+</span>
+                <div class="bg-[var(--neutral-gray-50)] rounded-lg border border-[var(--neutral-gray-200)] overflow-hidden">
+                    <button onclick="toggleFAQ(3)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-[var(--neutral-white)] transition-colors">
+                        <span class="font-semibold text-[var(--text-primary)] pr-4">Will this replace my billing software?</span>
+                        <span id="faq-icon-3" class="text-[var(--primary-purple)] text-xl flex-shrink-0">+</span>
                     </button>
                     <div id="faq-content-3" class="hidden px-6 pb-5">
-                        <p class="text-[#475569] leading-relaxed">
+                        <p class="text-[var(--text-secondary)] leading-relaxed">
                             No. It works alongside your current system.
                         </p>
                     </div>
                 </div>
 
                 <!-- FAQ 4 -->
-                <div class="bg-[#F8FAFC] rounded-lg border border-[#E5E7EB] overflow-hidden">
-                    <button onclick="toggleFAQ(4)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-white transition-colors">
-                        <span class="font-semibold text-[#0F172A] pr-4">Is this suitable for small pharmacies?</span>
-                        <span id="faq-icon-4" class="text-[#2563EB] text-xl flex-shrink-0">+</span>
+                <div class="bg-[var(--neutral-gray-50)] rounded-lg border border-[var(--neutral-gray-200)] overflow-hidden">
+                    <button onclick="toggleFAQ(4)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-[var(--neutral-white)] transition-colors">
+                        <span class="font-semibold text-[var(--text-primary)] pr-4">Is this suitable for small pharmacies?</span>
+                        <span id="faq-icon-4" class="text-[var(--primary-purple)] text-xl flex-shrink-0">+</span>
                     </button>
                     <div id="faq-content-4" class="hidden px-6 pb-5">
-                        <p class="text-[#475569] leading-relaxed">
+                        <p class="text-[var(--text-secondary)] leading-relaxed">
                             Yes. Especially single-store and 2–5 store owners.
                         </p>
                     </div>
                 </div>
 
                 <!-- FAQ 5 -->
-                <div class="bg-[#F8FAFC] rounded-lg border border-[#E5E7EB] overflow-hidden">
-                    <button onclick="toggleFAQ(5)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-white transition-colors">
-                        <span class="font-semibold text-[#0F172A] pr-4">What happens after the free tools?</span>
-                        <span id="faq-icon-5" class="text-[#2563EB] text-xl flex-shrink-0">+</span>
+                <div class="bg-[var(--neutral-gray-50)] rounded-lg border border-[var(--neutral-gray-200)] overflow-hidden">
+                    <button onclick="toggleFAQ(5)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-[var(--neutral-white)] transition-colors">
+                        <span class="font-semibold text-[var(--text-primary)] pr-4">What happens after the free tools?</span>
+                        <span id="faq-icon-5" class="text-[var(--primary-purple)] text-xl flex-shrink-0">+</span>
                     </button>
                     <div id="faq-content-5" class="hidden px-6 pb-5">
-                        <p class="text-[#475569] leading-relaxed">
+                        <p class="text-[var(--text-secondary)] leading-relaxed">
                             If you find value, you can later explore the full billing system — only if you want to.
                         </p>
                     </div>
@@ -510,25 +1062,25 @@
     </section>
 
     <!-- Final CTA Section -->
-    <section class="gradient-bg py-20 md:py-32 px-4 mt-16">
+    <section class="cta-gradient-bg py-20 md:py-32 px-4 mt-16">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-[var(--text-inverse)] mb-6 leading-tight">
                 Start With the Free Layer
             </h2>
-            <p class="text-xl md:text-2xl text-white mb-10 leading-relaxed opacity-95">
+            <p class="text-xl md:text-2xl text-[var(--text-inverse)] mb-10 leading-relaxed opacity-95">
                 See how this works for your store before deciding anything.
             </p>
-            <button onclick="openModal()" class="bg-white text-[#2563EB] font-bold text-lg px-12 py-5 rounded-full hover:bg-[#F8FAFC] transition-colors shadow-2xl">
-                Book My Free Demo
+            <button onclick="openModal()" class="bg-[var(--primary-purple)] text-white font-semibold text-lg px-8 py-4 rounded-full hover:bg-[var(--primary-purple-dark)] transition-all shadow-2xl hover:shadow-[0_0_40px_rgba(107,92,230,0.5)] hover:scale-105 brightness-110 hover:brightness-115">
+                See How Orders Get Smarter
             </button>
-            <p class="text-white text-sm mt-6 opacity-90">
+            <p class="text-[var(--text-inverse)] text-sm mt-6 opacity-90">
                 No credit card required • Start using in minutes
             </p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-[#E5E7EB] py-12 px-4">
+    <footer class="bg-[var(--neutral-white)] border-t border-[var(--neutral-gray-200)] py-12 px-4">
         <div class="max-w-4xl mx-auto text-center">
             <!-- Logo -->
             <div class="mb-6">
@@ -540,91 +1092,391 @@
             </div>
             
             <!-- Branding Text -->
-            <p class="text-[#475569] text-sm mb-6">
+            <p class="text-[var(--text-secondary)] text-sm mb-6">
                 MediAstraCloud – Pharmacy Management Software
             </p>
             
             <!-- Trust Lines -->
-            <div class="space-y-2 text-base text-[#64748B] mb-6">
+            <div class="space-y-2 text-base text-[var(--text-tertiary)] mb-6">
                 <p>Free to start.</p>
                 <p>Simple to use.</p>
                 <p>Upgrade only when it makes sense.</p>
             </div>
             
             <!-- Copyright -->
-            <p class="text-xs text-[#94A3B8]">
+            <p class="text-xs text-[var(--text-tertiary)]">
                 © 2025 MediAstraCloud. All rights reserved. • Made for Indian Pharmacies
             </p>
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div id="demoModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-8 relative shadow-2xl">
+    <!-- Vendor Price Comparison Modal -->
+    <div id="vendorModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
+        <div class="relative max-w-7xl w-full max-h-[95vh] flex flex-col md:flex-row gap-4 md:gap-6 bg-[var(--neutral-white)] rounded-lg shadow-2xl overflow-hidden">
             <!-- Close button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-[#475569] hover:text-[#0F172A] text-2xl leading-none">
+            <button onclick="closeVendorModal()" class="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-3xl leading-none bg-white bg-opacity-90 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md">
+                &times;
+            </button>
+            
+            <!-- Image Section (Right - 60% on desktop, full width on mobile, appears second on mobile) -->
+            <div class="w-full md:w-[60%] order-2 md:order-2 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
+                <img src="images/vendor_pricing_merged_scroll.png" alt="Vendor Price Comparison" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+            </div>
+            
+            <!-- Explanation Panel (Left - 40% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-1 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="mb-3">
+                        <img 
+                            src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                            alt="MediAstra" 
+                            class="h-6 opacity-60"
+                        >
+                    </div>
+                    <div class="text-xs text-[var(--text-secondary)] uppercase tracking-wide mb-2">What you're seeing</div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-[var(--primary-purple)] mb-6">
+                        Vendor Price Comparison
+                    </h3>
+                
+                <!-- What this screen does -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What this screen does</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Compares item prices across multiple vendors. Shows best price, difference amount, and price variance. Supports filters like month, year, and vendor selection.
+                    </p>
+                </div>
+                
+                <!-- What problems it catches -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What problems it catches</h4>
+                    <ul class="space-y-1.5 text-sm text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Overpaying for the same item</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Inconsistent supplier pricing</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Hidden margin leakage over time</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Why this matters -->
+                <div class="mb-4">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">Why this matters</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Gives clear, data-backed buying decisions instead of relying on memory or last invoices.
+                    </p>
+                </div>
+                </div>
+                <div class="mt-6">
+                    <button onclick="openDemoFromFeature()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
+                        Compare vendor prices
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order vs Received Check Modal -->
+    <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
+        <div class="relative max-w-7xl w-full max-h-[95vh] flex flex-col md:flex-row gap-4 md:gap-6 bg-[var(--neutral-white)] rounded-lg shadow-2xl overflow-hidden">
+            <!-- Close button -->
+            <button onclick="closeImageModal()" class="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-3xl leading-none bg-white bg-opacity-90 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md">
+                &times;
+            </button>
+            
+            <!-- Explanation Panel (Left - 40% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-1 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="mb-3">
+                        <img 
+                            src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                            alt="MediAstra" 
+                            class="h-6 opacity-60"
+                        >
+                    </div>
+                    <div class="text-xs text-[var(--text-secondary)] uppercase tracking-wide mb-2">What you're seeing</div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-[var(--primary-purple)] mb-6">
+                        Order vs Received Analysis
+                    </h3>
+                
+                <!-- What this screen does -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What this screen does</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Compares purchase order data with received stock. Matches items using name and pack size. Automatically highlights mismatches.
+                    </p>
+                </div>
+                
+                <!-- What problems it catches -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What problems it catches</h4>
+                    <ul class="space-y-1.5 text-sm text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Items received but not ordered</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Items ordered but not received</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Quantity mismatches</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Pack size differences</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Extra or missing stock entries</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Why this matters -->
+                <div class="mb-4">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">Why this matters</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Helps pharmacy owners catch supplier discrepancies before accepting stock or finalizing payments.
+                    </p>
+                </div>
+                </div>
+                <div class="mt-6">
+                    <button onclick="openDemoFromFeature()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
+                        Verify received stock
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Image Section (Right - 60% on desktop, full width on mobile, appears second on mobile) -->
+            <div class="w-full md:w-[60%] order-2 md:order-2 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
+                <img src="images/ordervspur-scroll.png" alt="Order vs Received Check" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Smarter Ordering Assistant Modal -->
+    <div id="smarterOrderingModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
+        <div class="relative max-w-7xl w-full max-h-[95vh] flex flex-col md:flex-row gap-4 md:gap-6 bg-[var(--neutral-white)] rounded-lg shadow-2xl overflow-hidden">
+            <!-- Close button -->
+            <button onclick="closeSmarterOrderingModal()" class="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-3xl leading-none bg-white bg-opacity-90 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md">
+                &times;
+            </button>
+            
+            <!-- Explanation Panel (Left - 40% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-1 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="mb-3">
+                        <img 
+                            src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                            alt="MediAstra" 
+                            class="h-6 opacity-60"
+                        >
+                    </div>
+                    <div class="text-xs text-[var(--text-secondary)] uppercase tracking-wide mb-2">WHAT YOU'RE SEEING</div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-[var(--primary-purple)] mb-6">
+                        Forecast Demand & Smart Ordering
+                    </h3>
+                
+                <!-- What this screen does -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What this screen does</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Analyzes historical sales data and predicts future order quantities for each item.
+                    </p>
+                </div>
+                
+                <!-- What problems it solves -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What problems it solves</h4>
+                    <ul class="space-y-1.5 text-sm text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Overstocking slow-moving items</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Missing fast movers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Expiry losses due to wrong ordering</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Manual guess-based purchasing</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Why this matters -->
+                <div class="mb-4">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">Why this matters</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Helps pharmacy owners place confident orders, reduce expiry, optimize cash flow, and save time.
+                    </p>
+                </div>
+                </div>
+                <div class="mt-6">
+                    <button onclick="openDemoFromFeature()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
+                        Start smart ordering now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Image Section (Right - 60% on desktop, full width on mobile, appears second on mobile) -->
+            <div class="w-full md:w-[60%] order-2 md:order-2 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
+                <img src="images/forecast.png" alt="Forecast Demand & Smart Ordering" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Alerts & Reminders Modal -->
+    <div id="paymentModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[60] flex items-center justify-center p-4">
+        <div class="relative max-w-7xl w-full max-h-[95vh] flex flex-col md:flex-row gap-4 md:gap-6 bg-[var(--neutral-white)] rounded-lg shadow-2xl overflow-hidden">
+            <!-- Close button -->
+            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-3xl leading-none bg-white bg-opacity-90 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md">
+                &times;
+            </button>
+            
+            <!-- Explanation Panel (Left - 40% on desktop, full width on mobile, appears first on mobile) -->
+            <div class="w-full md:w-[40%] order-1 md:order-1 bg-[var(--neutral-white)] border border-[var(--neutral-gray-200)] rounded-lg p-6 overflow-y-auto max-h-[95vh] shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="mb-3">
+                        <img 
+                            src="https://qa.mediastracloud.com/images/logo/MediAstra_Logo.header.png" 
+                            alt="MediAstra" 
+                            class="h-6 opacity-60"
+                        >
+                    </div>
+                    <div class="text-xs text-[var(--text-secondary)] uppercase tracking-wide mb-2">WHAT YOU'RE SEEING</div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-[var(--primary-purple)] mb-6">
+                        Payment Alerts & Follow-ups
+                    </h3>
+                
+                <!-- What this screen does -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What this screen does</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Shows upcoming, due, and overdue supplier payments in one place. Highlights priority payments clearly and groups alerts by urgency.
+                    </p>
+                </div>
+                
+                <!-- What problems it catches -->
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">What problems it catches</h4>
+                    <ul class="space-y-1.5 text-sm text-[var(--text-secondary)]">
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Missed payment deadlines</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Forgotten follow-ups with suppliers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--primary-purple)] mr-2">•</span>
+                            <span>Cash flow blind spots</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Why this matters -->
+                <div class="mb-4">
+                    <h4 class="text-base font-semibold text-[var(--text-primary)] mb-2">Why this matters</h4>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Helps pharmacies stay compliant, avoid penalties, and maintain supplier trust.
+                    </p>
+                </div>
+                </div>
+                <div class="mt-6">
+                    <button onclick="openDemoFromFeature()" class="w-full bg-[var(--primary-purple)] text-[var(--text-inverse)] font-semibold py-2.5 px-6 rounded-lg hover:bg-[var(--secondary-purple)] transition-colors">
+                        Manage payment alerts
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Image Section (Right - 60% on desktop, full width on mobile, appears second on mobile) -->
+            <div class="w-full md:w-[60%] order-2 md:order-2 bg-[var(--neutral-gray-50)] p-6 md:p-8 overflow-y-auto overflow-x-auto max-h-[95vh]">
+                <img src="images/paymentalerts_scroll.png" alt="Payment Alerts & Reminders" class="w-full h-auto rounded-lg shadow-lg" style="min-width: 100%; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="demoModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[70] flex items-center justify-center p-4">
+        <div class="bg-[var(--neutral-white)] rounded-2xl max-w-md w-full p-8 relative shadow-2xl">
+            <!-- Close button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-2xl leading-none">
                 &times;
             </button>
             
             <!-- Modal content -->
             <div class="mb-6">
-                <h3 class="text-2xl font-bold text-[#4F46E5] mb-2">Get Free Access to the Pharmacy Starter Layer</h3>
-                <p class="text-[#475569]">See how these tools work using real pharmacy scenarios.</p>
+                <h3 class="text-2xl font-bold text-[var(--primary-purple)] mb-2">Get Free Access to the Pharmacy Starter Layer</h3>
+                <p class="text-[var(--text-secondary)]">See how these tools work using real pharmacy scenarios.</p>
             </div>
             
             <!-- Form -->
             <form onsubmit="handleSubmit(event)" class="space-y-4">
                 <div>
-                    <label for="name" class="block text-sm font-semibold text-[#0F172A] mb-1">Name *</label>
+                    <label for="name" class="block text-sm font-semibold text-[var(--text-primary)] mb-1">Name *</label>
                     <input 
                         type="text" 
                         id="name" 
                         name="name" 
                         required 
-                        class="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent"
+                        class="w-full px-4 py-3 border border-[var(--neutral-gray-200)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-purple)] focus:border-transparent"
                         placeholder="Your full name"
                     >
                 </div>
                 
                 <div>
-                    <label for="mobile" class="block text-sm font-semibold text-[#0F172A] mb-1">Mobile Number *</label>
+                    <label for="mobile" class="block text-sm font-semibold text-[var(--text-primary)] mb-1">Mobile Number *</label>
                     <input 
                         type="tel" 
                         id="mobile" 
                         name="mobile" 
                         required 
                         pattern="[0-9]{10}"
-                        class="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent"
+                        class="w-full px-4 py-3 border border-[var(--neutral-gray-200)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-purple)] focus:border-transparent"
                         placeholder="10-digit mobile number"
                     >
                 </div>
                 
                 <div>
-                    <label for="city" class="block text-sm font-semibold text-[#0F172A] mb-1">City *</label>
+                    <label for="city" class="block text-sm font-semibold text-[var(--text-primary)] mb-1">City *</label>
                     <input 
                         type="text" 
                         id="city" 
                         name="city" 
                         required 
-                        class="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent"
+                        class="w-full px-4 py-3 border border-[var(--neutral-gray-200)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-purple)] focus:border-transparent"
                         placeholder="Your city"
                     >
                 </div>
                 
                 <div>
-                    <label for="email" class="block text-sm font-semibold text-[#0F172A] mb-1">Email (optional)</label>
+                    <label for="email" class="block text-sm font-semibold text-[var(--text-primary)] mb-1">Email (optional)</label>
                     <input 
                         type="email" 
                         id="email" 
                         name="email" 
-                        class="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent"
+                        class="w-full px-4 py-3 border border-[var(--neutral-gray-200)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-purple)] focus:border-transparent"
                         placeholder="your@email.com"
                     >
                 </div>
                 
                 <button 
                     type="submit" 
-                    class="w-full gradient-bg text-white font-semibold text-lg px-6 py-4 rounded-lg hover:opacity-90 transition-opacity shadow-lg mt-6"
+                    class="w-full gradient-bg text-[var(--text-inverse)] font-semibold text-lg px-6 py-4 rounded-lg hover:opacity-90 transition-opacity shadow-lg mt-6"
                 >
                     Schedule Free Demo
                 </button>
@@ -646,6 +1498,11 @@
             document.body.classList.remove('modal-open');
         }
 
+        // Helper function to open demo form without closing feature modal
+        function openDemoFromFeature() {
+            openModal();
+        }
+
         // Close modal when clicking on backdrop
         document.getElementById('demoModal').addEventListener('click', function(e) {
             if (e.target === this) {
@@ -656,7 +1513,97 @@
         // Close modal on Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeModal();
+                const demoModal = document.getElementById('demoModal');
+                // If demo modal is open, close only the demo modal (keep feature modal open)
+                if (!demoModal.classList.contains('hidden')) {
+                    closeModal();
+                } else {
+                    // Otherwise, close any open feature modals
+                    closeImageModal();
+                    closeVendorModal();
+                    closePaymentModal();
+                    closeSmarterOrderingModal();
+                }
+            }
+        });
+
+        // Image Modal functions
+        function openImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close image modal when clicking on backdrop
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
+
+        // Vendor Modal functions
+        function openVendorModal() {
+            const modal = document.getElementById('vendorModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeVendorModal() {
+            const modal = document.getElementById('vendorModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close vendor modal when clicking on backdrop
+        document.getElementById('vendorModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVendorModal();
+            }
+        });
+
+        // Payment Modal functions
+        function openPaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closePaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close payment modal when clicking on backdrop
+        document.getElementById('paymentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePaymentModal();
+            }
+        });
+
+        // Smarter Ordering Modal functions
+        function openSmarterOrderingModal() {
+            const modal = document.getElementById('smarterOrderingModal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeSmarterOrderingModal() {
+            const modal = document.getElementById('smarterOrderingModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close smarter ordering modal when clicking on backdrop
+        document.getElementById('smarterOrderingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSmarterOrderingModal();
             }
         });
 
@@ -697,6 +1644,14 @@
             }
         }
     </script>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/9014209205?text=Hi%2C%20I%20want%20to%20know%20more%20about%20MediAstra%20mini%20apps" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
+        <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
 
 </body>
 </html>
